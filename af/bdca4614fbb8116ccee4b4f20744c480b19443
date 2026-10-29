@@ -1,0 +1,20 @@
+data/documents/rvitm_department_directory.md
+  h_cd8a6bfed30f7c 1-5,8-55
+data/documents/rvitm_kcet_comedk_cutoffs_admissions.md
+  h_cd8a6bfed30f7c 2-4,7-10,13-18,20-25,27,29-32,34-36,39-41,43-48
+data/documents/rvitm_placements_and_career_development.md
+  h_cd8a6bfed30f7c 1-4,6-14,16-21,23-28,30-35
+frontend/src/components/WorkflowsView.tsx
+  h_cd8a6bfed30f7c 33-39,268
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "afbdca4614fbb8116ccee4b4f20744c480b19443",
+  "prompts": {},
+  "humans": {
+    "h_cd8a6bfed30f7c": {
+      "author": "sw <sw@sws-MacBook-Pro.local>"
+    }
+  }
+}
