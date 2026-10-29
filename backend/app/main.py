@@ -17,40 +17,49 @@ async def lifespan(app: FastAPI):
     # Startup: Initialize DB tables
     await init_db()
 
-    # Seed demonstration documents if database is empty
+    # Seed demonstration documents if missing from database
     async with AsyncSessionLocal() as session:
-        count_res = await session.execute(select(func.count(Document.id)))
-        count = count_res.scalar() or 0
-        if count == 0:
-            doc_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "data", "documents")
-            pipeline = IngestionPipeline()
-            for filepath in glob.glob(os.path.join(doc_dir, "*.md")):
-                filename = os.path.basename(filepath)
-                category = "academic"
-                if "bonafide" in filename:
-                    category = "administration"
-                elif "scholarship" in filename:
-                    category = "scholarships"
-                elif "anti_ragging" in filename:
-                    category = "student_welfare"
-                elif "department" in filename:
-                    category = "administration"
+        existing_res = await session.execute(select(Document.checksum).where(Document.is_active == True))
+        existing_checksums = set(existing_res.scalars().all())
 
-                with open(filepath, "rb") as f:
-                    content_bytes = f.read()
+        doc_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "data", "documents")
+        pipeline = IngestionPipeline()
+        for filepath in sorted(glob.glob(os.path.join(doc_dir, "*.md"))):
+            filename = os.path.basename(filepath)
+            with open(filepath, "rb") as f:
+                content_bytes = f.read()
 
-                try:
-                    await pipeline.ingest_document(
-                        session=session,
-                        content_bytes=content_bytes,
-                        filename=filename,
-                        category=category,
-                        version="1.0.0",
-                        auto_approve=True,  # Approved for test demonstration corpus
-                        actor="system_seeder"
-                    )
-                except Exception as e:
-                    pass
+            checksum = pipeline.compute_checksum(content_bytes)
+            if checksum in existing_checksums:
+                continue
+
+            category = "academic"
+            if "bonafide" in filename:
+                category = "administration"
+            elif "scholarship" in filename:
+                category = "scholarships"
+            elif "anti_ragging" in filename:
+                category = "student_welfare"
+            elif "department" in filename:
+                category = "administration"
+            elif "placement" in filename:
+                category = "student_welfare"
+            elif "cutoff" in filename or "admission" in filename:
+                category = "admissions"
+
+            try:
+                await pipeline.ingest_document(
+                    session=session,
+                    content_bytes=content_bytes,
+                    filename=filename,
+                    category=category,
+                    version="1.0.0",
+                    auto_approve=True,
+                    actor="system_seeder"
+                )
+                existing_checksums.add(checksum)
+            except Exception:
+                pass
 
     yield
     # Shutdown

@@ -51,6 +51,16 @@ class IntentExtractor:
         "LIBRARY_RULES": [
             r'library', r'books', r'digital library', r'borrow', r'renewal', r'timing', r'fine',
             r'ಗ್ರಂಥಾಲಯ', r'ಪುಸ್ತಕ', r'पुस्तकालय', r'किताब'
+        ],
+        "PLACEMENTS_AND_CAREER": [
+            r'placement', r'highest package', r'average package', r'package', r'salary',
+            r'recruiter', r'recruitment', r'job', r'offers', r'lpa', r'ctc', r'companies',
+            r'ಪ್ಲೇಸ್‌ಮೆಂಟ್', r'ಪ್ಯಾಕೇಜ್', r'ಪ್ಲೇಸ್ಮೆಂಟ್', r'प्लेसमेंट', r'पैकेज', r'सैलरी'
+        ],
+        "ADMISSIONS_AND_CUTOFF": [
+            r'cutoff', r'cut off', r'kcet', r'comedk', r'admission', r'rank', r'ranks',
+            r'seat intake', r'seats', r'eligibility', r'quota', r'management quota',
+            r'ಕಟ್ ಆಫ್', r'ಕಟ್‌ಆಫ್', r'ಪ್ರವೇಶ', r'कट ऑफ', r'कटऑफ़', r'दाखिला'
         ]
     }
 
@@ -156,6 +166,8 @@ class IntentExtractor:
             "SCHOLARSHIPS": "scholarships",
             "DEPARTMENT_CONTACTS": "administration",
             "ANTI_RAGGING_CONDUCT": "student_welfare",
-            "LIBRARY_RULES": "general"
+            "LIBRARY_RULES": "general",
+            "PLACEMENTS_AND_CAREER": "student_welfare",
+            "ADMISSIONS_AND_CUTOFF": "admissions"
         }
         return mapping.get(intent, "general")

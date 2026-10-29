@@ -373,12 +373,6 @@ export const ChatFeed: React.FC<ChatFeedProps> = ({
                     >
                       {copiedId === msg.id ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
                     </button>
-
-                    {msg.latency_ms && (
-                      <span className="text-[10px] text-slate-400 ml-1 font-mono">
-                        {(msg.latency_ms / 1000).toFixed(2)}s
-                      </span>
-                    )}
                   </div>
                 )}
               </div>
@@ -388,36 +382,38 @@ export const ChatFeed: React.FC<ChatFeedProps> = ({
                 {msg.content}
               </div>
 
-              {/* Verified Source Citations */}
-              {msg.citations && msg.citations.length > 0 && (
-                <div className="mt-4 pt-3 border-t border-slate-100">
-                  <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-2 flex items-center justify-between">
-                    <span className="flex items-center gap-1.5 text-emerald-700">
-                      <ShieldCheck className="w-3.5 h-3.5" />
-                      Verified Source Grounding ({msg.citations.length})
-                    </span>
-                    <span className="text-[10px] text-slate-400 normal-case">Click to preview document snippet</span>
+              {/* Verified Source Citations - Only shown when answered with evidence */}
+              {msg.status === 'answered_with_evidence' && msg.citations && msg.citations.length > 0 && (() => {
+                const uniqueCitations = msg.citations.filter((cit, idx, self) =>
+                  idx === self.findIndex((c) => c.document_title === cit.document_title)
+                );
+                return (
+                  <div className="mt-3.5 pt-2.5 border-t border-slate-100">
+                    <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                      <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                      <span>Official Sources ({uniqueCitations.length})</span>
+                    </div>
+                    
+                    <div className="flex flex-wrap gap-2">
+                      {uniqueCitations.map((cit, cIdx) => (
+                        <button
+                          key={cIdx}
+                          onClick={() => onSelectCitation(cit)}
+                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-sky-50/80 hover:bg-sky-100 border border-sky-200 text-sky-950 text-xs font-semibold transition-all shadow-2xs group"
+                        >
+                          <BookOpen className="w-3.5 h-3.5 text-sky-600 group-hover:scale-105 transition-transform" />
+                          <span className="truncate max-w-[200px] sm:max-w-[260px]">
+                            {cit.document_title}
+                          </span>
+                          <span className="bg-sky-200/80 text-sky-900 text-[10px] px-1.5 py-0.5 rounded-md font-bold">
+                            p.{cit.page_number}
+                          </span>
+                        </button>
+                      ))}
+                    </div>
                   </div>
-                  
-                  <div className="flex flex-wrap gap-2">
-                    {msg.citations.map((cit, cIdx) => (
-                      <button
-                        key={cIdx}
-                        onClick={() => onSelectCitation(cit)}
-                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-sky-50/90 hover:bg-sky-100 border border-sky-200 text-sky-950 text-xs font-semibold transition-all shadow-2xs group"
-                      >
-                        <BookOpen className="w-3.5 h-3.5 text-sky-600 group-hover:scale-105 transition-transform" />
-                        <span className="truncate max-w-[200px] sm:max-w-[260px]">
-                          {cit.document_title}
-                        </span>
-                        <span className="bg-sky-200/80 text-sky-900 text-[10px] px-1.5 py-0.5 rounded-md font-bold">
-                          p.{cit.page_number}
-                        </span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
+                );
+              })()}
 
               {/* Follow-up Recommendations */}
               {msg.suggested_followups && msg.suggested_followups.length > 0 && (
@@ -443,11 +439,8 @@ export const ChatFeed: React.FC<ChatFeedProps> = ({
               {/* Feedback Controls */}
               {msg.role === 'assistant' && (
                 <div className="mt-3 pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                  <span className="text-[10px] font-semibold text-slate-500">
-                    {msg.status === 'answered_with_evidence' && '✅ Grounded in RVITM Policy'}
-                    {msg.status === 'insufficient_evidence' && '⚠️ Insufficient Evidence (Abstained)'}
-                    {msg.status === 'clarification_needed' && 'ℹ️ Clarification Needed'}
-                    {msg.status === 'out_of_scope' && '🚫 Non-College Question'}
+                  <span className="text-[10px] font-medium text-slate-400">
+                    {msg.status === 'answered_with_evidence' ? 'Verified Information' : ''}
                   </span>
 
                   <div className="flex items-center space-x-1">

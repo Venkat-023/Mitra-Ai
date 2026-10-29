@@ -41,20 +41,12 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
 
             <div>
-              <div className="flex items-center space-x-2">
-                <h1 className="text-sm sm:text-base font-bold text-slate-900 tracking-tight flex items-center gap-1.5">
-                  RVITM Mitra AI
-                  <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 shadow-2xs">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1 animate-ping"></span>
-                    OpenRouter Active
-                  </span>
-                  <span className="hidden xl:inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold text-indigo-700 bg-indigo-50 border border-indigo-200/60 font-mono">
-                    dots-3-note-preview:free
-                  </span>
-                </h1>
-              </div>
-              <p className="text-[11px] text-slate-500 font-medium tracking-tight">
-                ಆರ್.ವಿ.ಐ.ಟಿ.ಎಂ ಮಿತ್ರ • Grounded College Intelligence
+              <h1 className="text-sm sm:text-base font-bold text-slate-900 tracking-tight flex items-center gap-2">
+                RVITM Mitra AI
+                <span className="w-2 h-2 rounded-full bg-emerald-500 shadow-sm shadow-emerald-400" title="Online & Connected" />
+              </h1>
+              <p className="text-[11px] text-slate-500 font-medium">
+                ಆರ್.ವಿ.ಐ.ಟಿ.ಎಂ ಮಿತ್ರ • College Information Assistant
               </p>
             </div>
           </div>
