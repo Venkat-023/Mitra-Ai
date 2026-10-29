@@ -30,12 +30,13 @@ export const WorkflowsView: React.FC<WorkflowProps> = ({ onStartChatQuery }) => 
   const progressPercent = Math.round((completedCount / 4) * 100);
 
   const CONTACTS_DATA = [
-    { title: "Principal's Office", name: "Dr. Malini M.", location: "Admin Block, Ground Floor", email: "principal@rvitm.edu.in", dept: "admin" },
-    { title: "CSE Department (HoD)", name: "Dr. Latha Parthiban", location: "Academic Block A, Room A-301", email: "hod.cse@rvitm.edu.in", dept: "cse" },
-    { title: "ISE Department (HoD)", name: "Dr. B. Sudarshan", location: "Academic Block A, Room A-401", email: "hod.ise@rvitm.edu.in", dept: "ise" },
-    { title: "ECE Department (HoD)", name: "Dr. Girish V.", location: "Academic Block B, Room B-201", email: "hod.ece@rvitm.edu.in", dept: "ece" },
-    { title: "Training & Placement (TPO)", name: "Prof. Anand Murthy", location: "Placement Auditorium Block", email: "placements@rvitm.edu.in", dept: "placement" },
-    { title: "Anti-Ragging Squad Head", name: "Dr. Prashanth Kumar", location: "Helpline: 1800-180-5522", email: "Toll-free 24x7 Emergency", dept: "welfare" }
+    { title: "Principal's Office", name: "Dr. Nagashettappa Biradar", location: "Admin Block, Ground Floor", email: "principal.rvitm@rvei.edu.in", dept: "admin" },
+    { title: "Central College Office", name: "RVITM Campus Desk", location: "Chaithanya Layout, 8th Phase JP Nagar", email: "info.rvitm@rvei.edu.in", dept: "admin" },
+    { title: "CSE Department (HoD)", name: "Dr. Latha Parthiban", location: "Academic Block A, 3rd Floor", email: "cse.rvitm@rvei.edu.in", dept: "cse" },
+    { title: "ISE Department (HoD)", name: "Dr. B. Sudarshan", location: "Academic Block A, 4th Floor", email: "ise.rvitm@rvei.edu.in", dept: "ise" },
+    { title: "ECE Department (HoD)", name: "Dr. Girish V.", location: "Academic Block B, 2nd Floor", email: "ece.rvitm@rvei.edu.in", dept: "ece" },
+    { title: "Training & Placement (TPO)", name: "Placement & Career Guidance Cell", location: "Career Center, 2nd Floor", email: "placements.rvitm@rvei.edu.in", dept: "placement" },
+    { title: "Anti-Ragging Squad Head", name: "Student Disciplinary Committee", location: "Helpline: 080-35095100", email: "Emergency / Welfare Desk", dept: "welfare" }
   ];
 
   const filteredContacts = CONTACTS_DATA.filter(c => 
@@ -264,7 +265,7 @@ export const WorkflowsView: React.FC<WorkflowProps> = ({ onStartChatQuery }) => 
                   </div>
                   <div className="flex items-center gap-2.5 text-xs text-slate-700 font-medium">
                     <PhoneCall className="w-4 h-4 text-indigo-600" />
-                    <span>+91-80-6815-5600 (Ext. 202)</span>
+                    <span>080-35095100 (RVITM Central Desk)</span>
                   </div>
                 </div>
 
