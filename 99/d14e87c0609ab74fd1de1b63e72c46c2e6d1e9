@@ -1,0 +1,22 @@
+backend/tests/test_evaluation_runner.py
+  h_cd8a6bfed30f7c 1-37
+docs/evaluations/BENCHMARK_REPORT.md
+  h_cd8a6bfed30f7c 1-41
+evaluation/dataset_generator.py
+  h_cd8a6bfed30f7c 1-362
+evaluation/multilingual_benchmark.json
+  h_cd8a6bfed30f7c 1-5587
+evaluation/runner.py
+  h_cd8a6bfed30f7c 1-227
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "99d14e87c0609ab74fd1de1b63e72c46c2e6d1e9",
+  "prompts": {},
+  "humans": {
+    "h_cd8a6bfed30f7c": {
+      "author": "sw <sw@sws-MacBook-Pro.local>"
+    }
+  }
+}
