@@ -1,0 +1,20 @@
+.env.example
+  h_cd8a6bfed30f7c 1-42
+backend/app/core/database.py
+  h_cd8a6bfed30f7c 1-2,8-22,31
+backend/app/services/retrieval/hybrid_retriever.py
+  h_cd8a6bfed30f7c 136-143
+backend/app/services/retrieval/reranker.py
+  h_cd8a6bfed30f7c 18-19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "94c7753199dd0b4aed25b5413e3482e7e2fc44c7",
+  "prompts": {},
+  "humans": {
+    "h_cd8a6bfed30f7c": {
+      "author": "sw <sw@sws-MacBook-Pro.local>"
+    }
+  }
+}
