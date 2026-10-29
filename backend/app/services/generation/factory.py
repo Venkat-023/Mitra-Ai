@@ -1,13 +1,26 @@
 from backend.app.core.config import settings
 from backend.app.services.generation.provider import LLMProvider
 from backend.app.services.generation.mock_provider import MockLLMProvider
-from backend.app.services.generation.api_providers import GeminiLLMProvider, OpenAILLMProvider, OllamaLLMProvider
+from backend.app.services.generation.api_providers import (
+    OpenRouterLLMProvider,
+    GeminiLLMProvider,
+    OpenAILLMProvider,
+    OllamaLLMProvider
+)
 
 _llm_instance = None
 
 def get_llm_provider() -> LLMProvider:
     global _llm_instance
     if _llm_instance is not None:
+        return _llm_instance
+
+    # OpenRouter has highest priority if API key is provided
+    if settings.OPENROUTER_API_KEY:
+        _llm_instance = OpenRouterLLMProvider(
+            api_key=settings.OPENROUTER_API_KEY,
+            model=getattr(settings, "OPENROUTER_MODEL", "dots-studio/dots-3-note-preview:free")
+        )
         return _llm_instance
 
     provider = settings.LLM_PROVIDER.lower()
@@ -21,3 +34,4 @@ def get_llm_provider() -> LLMProvider:
         _llm_instance = MockLLMProvider()
 
     return _llm_instance
+

@@ -41,13 +41,16 @@ class Settings(BaseSettings):
     ]
 
     # AI / LLM Configuration
-    LLM_PROVIDER: str = Field(default="mock", description="gemini | openai | anthropic | ollama | mock")
+    LLM_PROVIDER: str = Field(default="mock", description="openrouter | gemini | openai | anthropic | ollama | mock")
+    OPENROUTER_API_KEY: Optional[str] = None
+    OPENROUTER_MODEL: str = "dots-studio/dots-3-note-preview:free"
     GEMINI_API_KEY: Optional[str] = None
     OPENAI_API_KEY: Optional[str] = None
     ANTHROPIC_API_KEY: Optional[str] = None
     OLLAMA_BASE_URL: str = "http://localhost:11434"
     LLM_MODEL: str = "gemini-1.5-flash"
     TEMPERATURE: float = 0.1
+
 
     # Embedding Configuration
     EMBEDDING_PROVIDER: str = Field(default="mock", description="openai | huggingface | ollama | mock")

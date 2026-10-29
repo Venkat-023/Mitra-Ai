@@ -3,7 +3,35 @@ import json
 from typing import Optional
 from backend.app.services.generation.provider import LLMProvider
 
+class OpenRouterLLMProvider(LLMProvider):
+    def __init__(self, api_key: str, model: str = "dots-studio/dots-3-note-preview:free"):
+        self.api_key = api_key
+        self.model = model
+
+    async def generate(self, system_prompt: str, user_prompt: str, temperature: float = 0.1) -> str:
+        url = "https://openrouter.ai/api/v1/chat/completions"
+        headers = {
+            "Authorization": f"Bearer {self.api_key}",
+            "HTTP-Referer": "http://localhost:5173",
+            "X-Title": "RVITM Mitra AI",
+            "Content-Type": "application/json"
+        }
+        payload = {
+            "model": self.model,
+            "temperature": temperature,
+            "messages": [
+                {"role": "system", "content": system_prompt + "\n\nCRITICAL: Return strictly valid JSON with keys: \"answer\", \"status\", \"suggested_followups\". Do not include reasoning or markdown."},
+                {"role": "user", "content": user_prompt}
+            ]
+        }
+        async with httpx.AsyncClient(timeout=50.0) as client:
+            resp = await client.post(url, headers=headers, json=payload)
+            resp.raise_for_status()
+            data = resp.json()
+            return data["choices"][0]["message"]["content"]
+
 class GeminiLLMProvider(LLMProvider):
+
     def __init__(self, api_key: str, model: str = "gemini-1.5-flash"):
         self.api_key = api_key
         self.model = model

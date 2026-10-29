@@ -7,12 +7,13 @@ from backend.app.models.conversation import AnswerabilityStatus
 from backend.app.services.nlp.service import ProcessedQuery
 from backend.app.services.retrieval.base import RetrievalResult, RetrievedChunk
 from backend.app.services.generation.factory import get_llm_provider
+from backend.app.services.generation.provider import LLMProvider
 from backend.app.services.generation.prompt_templates import SYSTEM_GROUNDING_PROMPT, USER_EVIDENCE_TEMPLATE
 from backend.app.core.config import settings
 
 class AnswerGenerationService:
-    def __init__(self):
-        self.llm_provider = get_llm_provider()
+    def __init__(self, provider: Optional[LLMProvider] = None):
+        self.llm_provider = provider or get_llm_provider()
 
     async def generate_answer(
         self,
@@ -116,7 +117,19 @@ class AnswerGenerationService:
         # 5. Call LLM
         try:
             raw_output = await self.llm_provider.generate(system_prompt, user_prompt, temperature=0.1)
-            parsed_json = json.loads(raw_output)
+            clean_output = raw_output.strip()
+            if "```json" in clean_output:
+                clean_output = clean_output.split("```json")[1].split("```")[0].strip()
+            elif "```" in clean_output:
+                clean_output = clean_output.split("```")[1].split("```")[0].strip()
+            
+            # Find JSON boundaries
+            import re
+            json_match = re.search(r'(\{[\s\S]*\})', clean_output)
+            if json_match:
+                clean_output = json_match.group(1)
+
+            parsed_json = json.loads(clean_output)
             ans_text = parsed_json.get("answer", "")
             followups = parsed_json.get("suggested_followups", [])
             status_val = parsed_json.get("status", AnswerabilityStatus.ANSWERED_WITH_EVIDENCE.value)
@@ -125,6 +138,7 @@ class AnswerGenerationService:
             ans_text = raw_output if 'raw_output' in locals() else "Verified college information provided below."
             followups = []
             status_val = AnswerabilityStatus.ANSWERED_WITH_EVIDENCE.value
+
 
         return ChatResponse(
             conversation_id=conv_id,

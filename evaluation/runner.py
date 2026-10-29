@@ -13,13 +13,14 @@ from backend.app.services.retrieval.hybrid_retriever import HybridRetriever
 from backend.app.services.generation.answer_service import AnswerGenerationService
 from backend.app.services.ingestion.pipeline import IngestionPipeline
 from backend.app.services.retrieval.metrics import RetrievalMetrics
+from backend.app.services.generation.mock_provider import MockLLMProvider
 
 class BenchmarkRunner:
     def __init__(self, dataset_path: str = "evaluation/multilingual_benchmark.json"):
         self.dataset_path = dataset_path
         self.nlp = MultilingualNLPService()
         self.retriever = HybridRetriever()
-        self.generator = AnswerGenerationService()
+        self.generator = AnswerGenerationService(provider=MockLLMProvider())
 
     async def setup_test_corpus(self, session: AsyncSession):
         """Ingests official demonstration corpus into test database."""

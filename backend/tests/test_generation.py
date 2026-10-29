@@ -2,6 +2,7 @@ import pytest
 from backend.app.services.nlp.service import MultilingualNLPService
 from backend.app.services.retrieval.base import RetrievalResult, RetrievedChunk
 from backend.app.services.generation.answer_service import AnswerGenerationService
+from backend.app.services.generation.mock_provider import MockLLMProvider
 from backend.app.models.conversation import AnswerabilityStatus
 
 @pytest.fixture
@@ -10,7 +11,7 @@ def nlp_service():
 
 @pytest.fixture
 def answer_service():
-    return AnswerGenerationService()
+    return AnswerGenerationService(provider=MockLLMProvider())
 
 @pytest.mark.asyncio
 async def test_grounded_answer_with_citations(nlp_service: MultilingualNLPService, answer_service: AnswerGenerationService):

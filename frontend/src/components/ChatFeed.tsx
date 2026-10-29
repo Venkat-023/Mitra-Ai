@@ -3,7 +3,7 @@ import { ChatMessage, CitationItem } from '../types';
 import { 
   Send, ThumbsUp, ThumbsDown, BookOpen, Sparkles,
   HelpCircle, ShieldCheck, ChevronRight, Mic, MicOff, Volume2, Square,
-  Copy, Check
+  Copy, Check, Clock, Calendar, Award, Building, AlertTriangle, FileText
 } from 'lucide-react';
 import { submitFeedback } from '../services/api';
 import { voiceAgent } from '../services/voice';
@@ -18,13 +18,67 @@ interface ChatFeedProps {
   currentLanguage: string;
 }
 
-const SAMPLE_SUGGESTIONS = [
-  { category: '⚡ Academics', label: 'Attendance Rules', query: 'Attendance kitni honi chahiye?' },
-  { category: '📜 Policies', label: 'ಹಾಜರಾತಿ ನಿಯಮಗಳು', query: 'Attendance eshtu irbeku?' },
-  { category: '🎓 Certificate', label: 'Bonafide Certificate', query: 'How do I apply for a Bonafide Certificate at RVITM?' },
-  { category: '📝 VTU Exams', label: 'ಪರೀಕ್ಷಾ ಅರ್ಜಿ', query: 'Exam form submit madodu elli?' },
-  { category: '💰 Financial', label: 'SSP Scholarships', query: 'What are the SSP scholarship eligibility criteria?' },
-  { category: '🏢 Campus', label: 'CSE Department HoD', query: 'Who is the Head of Department for CSE?' },
+const BENTO_SECTIONS = [
+  {
+    id: 'attendance',
+    title: 'VTU Attendance Rule',
+    tag: 'Clause 8.1',
+    icon: Clock,
+    color: 'from-amber-500/10 to-orange-500/10 border-amber-200/80 text-amber-900',
+    tagColor: 'bg-amber-100 text-amber-800',
+    desc: '85% mandatory aggregate. Up to 10% medical condonation allowed.',
+    query: 'What is the attendance policy at RVITM according to VTU regulations?'
+  },
+  {
+    id: 'bonafide',
+    title: 'Bonafide Certificate',
+    tag: 'Counter 2',
+    icon: FileText,
+    color: 'from-blue-500/10 to-indigo-500/10 border-blue-200/80 text-blue-900',
+    tagColor: 'bg-blue-100 text-blue-800',
+    desc: 'Application procedure, document checklist & 48h turnaround time.',
+    query: 'How do I apply for a Bonafide Certificate at RVITM?'
+  },
+  {
+    id: 'exams',
+    title: 'CIE & SEE Schedules',
+    tag: 'Exam Cell',
+    icon: Calendar,
+    color: 'from-indigo-500/10 to-purple-500/10 border-indigo-200/80 text-indigo-900',
+    tagColor: 'bg-indigo-100 text-indigo-800',
+    desc: 'Key test dates for Odd Semester 2026-27 & minimum 40% passing standard.',
+    query: 'When are the CIE-1, CIE-2, and SEE exams scheduled for 2026-27?'
+  },
+  {
+    id: 'scholarships',
+    title: 'SSP & AICTE Pragati',
+    tag: '₹50,000/yr',
+    icon: Award,
+    color: 'from-emerald-500/10 to-teal-500/10 border-emerald-200/80 text-emerald-900',
+    tagColor: 'bg-emerald-100 text-emerald-800',
+    desc: 'Post-Matric scholarship eligibility and Aadhaar NPCI seeding instructions.',
+    query: 'What are the eligibility criteria and documents required for SSP scholarship?'
+  },
+  {
+    id: 'leadership',
+    title: 'HoDs & Department Cabins',
+    tag: 'Directory',
+    icon: Building,
+    color: 'from-sky-500/10 to-blue-500/10 border-sky-200/80 text-sky-900',
+    tagColor: 'bg-sky-100 text-sky-800',
+    desc: 'Cabin locations, HoD email addresses & administrative extensions.',
+    query: 'Who are the Heads of Departments for CSE, ISE, and ECE at RVITM?'
+  },
+  {
+    id: 'helpline',
+    title: 'Anti-Ragging Helpline',
+    tag: 'Toll-free 24x7',
+    icon: AlertTriangle,
+    color: 'from-rose-500/10 to-pink-500/10 border-rose-200/80 text-rose-900',
+    tagColor: 'bg-rose-100 text-rose-800',
+    desc: 'Zero tolerance policy & 24x7 emergency grievance contacts.',
+    query: 'What is the anti-ragging policy and emergency helpline number at RVITM?'
+  }
 ];
 
 export const ChatFeed: React.FC<ChatFeedProps> = ({
@@ -149,24 +203,37 @@ export const ChatFeed: React.FC<ChatFeedProps> = ({
   };
 
   return (
-    <div className="flex-1 flex flex-col h-[calc(100vh-5.5rem)] max-w-5xl w-full mx-auto px-4 sm:px-6">
+    <div className="flex-1 flex flex-col h-[calc(100vh-5.5rem)] max-w-5xl w-full mx-auto px-3 sm:px-6">
       
       {/* Scrollable Chat History */}
-      <div className="flex-1 overflow-y-auto py-4 sm:py-6 space-y-6">
+      <div className="flex-1 overflow-y-auto py-3 sm:py-6 space-y-6">
         
-        {/* Welcome Empty State with Mitra Living Voice Orb */}
+        {/* Welcome Empty State with Orbital Gyro Mitra AI Companion */}
         {messages.length === 0 && (
-          <div className="max-w-2xl mx-auto text-center py-6 sm:py-10 px-4 animate-fade-in space-y-6">
+          <div className="max-w-3xl mx-auto text-center py-4 sm:py-8 px-2 sm:px-4 animate-fade-in space-y-6">
             
-            {/* Interactive Living Voice Orb */}
-            <div className="relative inline-flex items-center justify-center mb-2">
-              <div className={`w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-tr from-indigo-500 via-blue-500 to-sky-400 p-0.5 shadow-xl shadow-indigo-500/25 flex items-center justify-center cursor-pointer transition-all ${
-                isListening || speakingMessageId ? 'voice-orb-active' : 'hover:scale-105'
-              }`}
-              onClick={isListening ? handleStopMic : handleStartMic}
-              title={isListening ? "Listening... Click to stop" : "Click to speak with Mitra Voice Agent"}
+            {/* Innovative Orbital Gyro Visualizer */}
+            <div className="relative inline-flex items-center justify-center p-6">
+              
+              {/* Outer Orbiting Gyro Ring */}
+              <div className="absolute w-36 h-36 sm:w-44 sm:h-44 rounded-full border border-dashed border-indigo-300/60 animate-orbit pointer-events-none">
+                <span className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-indigo-500 shadow-sm shadow-indigo-500/50"></span>
+              </div>
+
+              {/* Inner Reverse Gyro Ring */}
+              <div className="absolute w-28 h-28 sm:w-36 sm:h-36 rounded-full border border-sky-300/50 animate-orbit-reverse pointer-events-none">
+                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-2 h-2 rounded-full bg-sky-400"></span>
+              </div>
+
+              {/* Central Pulsating Core */}
+              <div 
+                onClick={isListening ? handleStopMic : handleStartMic}
+                className={`relative z-10 w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-tr from-indigo-600 via-blue-600 to-sky-500 p-1 shadow-xl shadow-indigo-500/25 cursor-pointer transition-transform duration-300 hover:scale-105 ${
+                  isListening || speakingMessageId ? 'voice-orb-active' : ''
+                }`}
+                title={isListening ? "Listening... Click to stop" : "Click to speak with Mitra AI"}
               >
-                <div className="w-full h-full rounded-full bg-white/95 backdrop-blur-md flex flex-col items-center justify-center p-2">
+                <div className="w-full h-full rounded-full bg-white flex flex-col items-center justify-center p-2 text-center select-none">
                   {isListening ? (
                     <div className="flex items-center gap-1">
                       <span className="w-1 bg-indigo-600 rounded-full wave-bar [animation-delay:0.1s]"></span>
@@ -176,47 +243,70 @@ export const ChatFeed: React.FC<ChatFeedProps> = ({
                   ) : (
                     <Sparkles className="w-7 h-7 text-indigo-600 animate-pulse" />
                   )}
-                  <span className="text-[9px] font-bold text-indigo-900 mt-1 uppercase tracking-wider">
+                  <span className="text-[10px] font-extrabold text-indigo-950 mt-1 uppercase tracking-wider">
                     {isListening ? 'Listening' : 'Mitra AI'}
                   </span>
                 </div>
               </div>
             </div>
 
+            {/* Welcome Headings */}
             <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold border border-emerald-200/80 mb-2 shadow-2xs">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                OpenRouter Live Model Connected
+              </div>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-                How may I assist you today?
+                How may I assist your campus journey?
               </h2>
-              <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed max-w-lg mx-auto">
-                Official source-grounded college intelligence for R V Institute of Technology & Management. Talk or type in <strong className="text-indigo-900">English</strong>, <strong className="text-indigo-900">ಕನ್ನಡ</strong>, or <strong className="text-indigo-900">हिन्दी</strong>.
+              <p className="mt-2 text-xs sm:text-sm text-slate-600 max-w-lg mx-auto leading-relaxed">
+                Source-grounded college intelligence for R V Institute of Technology & Management. Ask or speak in <strong className="text-indigo-950">English</strong>, <strong className="text-indigo-950">ಕನ್ನಡ</strong>, or <strong className="text-indigo-950">हिन्दी</strong>.
               </p>
             </div>
 
-            {/* Quick Motion Prompt Cards */}
-            <div>
-              <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-3">
-                Suggested Campus Queries
+            {/* Creative Bento Inquiry Matrix */}
+            <div className="pt-2">
+              <div className="flex items-center justify-between text-xs text-slate-500 font-bold uppercase tracking-wider mb-3 px-1">
+                <span>Explore Institutional Knowledge</span>
+                <span className="text-indigo-600 font-semibold normal-case">Click any card to ask instantly</span>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5 text-left">
-                {SAMPLE_SUGGESTIONS.map((item, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => onSendMessage(item.query)}
-                    className="motion-card p-3.5 rounded-2xl group flex flex-col justify-between"
-                  >
-                    <div className="flex items-center justify-between mb-1.5">
-                      <span className="text-[10px] font-bold text-indigo-700 bg-indigo-50/80 px-2 py-0.5 rounded-md border border-indigo-200/50">
-                        {item.category}
-                      </span>
-                      <ChevronRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-indigo-600 group-hover:translate-x-0.5 transition-all" />
-                    </div>
-                    <div className="text-xs font-semibold text-slate-800 group-hover:text-indigo-900 transition-colors">
-                      {item.query}
-                    </div>
-                  </button>
-                ))}
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 text-left">
+                {BENTO_SECTIONS.map((sec) => {
+                  const Icon = sec.icon;
+                  return (
+                    <button
+                      key={sec.id}
+                      onClick={() => onSendMessage(sec.query)}
+                      className={`bento-card p-4 rounded-2xl group flex flex-col justify-between border transition-all ${sec.color}`}
+                    >
+                      <div>
+                        <div className="flex items-center justify-between mb-2">
+                          <div className="p-2 rounded-xl bg-white shadow-xs text-indigo-600">
+                            <Icon className="w-4 h-4" />
+                          </div>
+                          <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${sec.tagColor}`}>
+                            {sec.tag}
+                          </span>
+                        </div>
+                        <h3 className="font-bold text-sm text-slate-900 group-hover:text-indigo-950 transition-colors">
+                          {sec.title}
+                        </h3>
+                        <p className="text-[11px] text-slate-600 mt-1 line-clamp-2">
+                          {sec.desc}
+                        </p>
+                      </div>
+
+                      <div className="mt-3 pt-2.5 border-t border-slate-200/50 flex items-center justify-between text-[11px] font-semibold text-indigo-700">
+                        <span>Ask Mitra</span>
+                        <ChevronRight className="w-3.5 h-3.5 text-indigo-500 group-hover:translate-x-1 transition-transform" />
+                      </div>
+                    </button>
+                  );
+                })}
               </div>
             </div>
+
           </div>
         )}
 
@@ -234,54 +324,59 @@ export const ChatFeed: React.FC<ChatFeedProps> = ({
               }`}
             >
               {/* Message Header */}
-              <div className="flex items-center justify-between text-xs mb-2 font-medium">
-                <span className={msg.role === 'user' ? 'text-indigo-100 font-semibold' : 'text-slate-700 font-bold flex items-center gap-1.5'}>
+              <div className="flex items-center justify-between text-xs mb-2.5 font-medium">
+                <span className={msg.role === 'user' ? 'text-indigo-100 font-semibold' : 'text-slate-800 font-bold flex items-center gap-1.5'}>
                   {msg.role === 'user' ? (
                     'You'
                   ) : (
                     <>
-                      <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                       RVITM Mitra AI
                     </>
                   )}
                 </span>
                 
-                {/* Actions Dock for Assistant: Listen, Copy, Latency */}
+                {/* Actions Dock: Audio Player, Copy, Time */}
                 {msg.role === 'assistant' && (
                   <div className="flex items-center gap-1">
                     <button
                       onClick={() => handleSpeak(msg.id, msg.content, msg.language || currentLanguage)}
-                      className={`px-2 py-1 rounded-lg text-xs transition-colors flex items-center gap-1 ${
+                      className={`px-2.5 py-1 rounded-xl text-xs transition-colors flex items-center gap-1.5 ${
                         speakingMessageId === msg.id
-                          ? 'bg-indigo-100 text-indigo-800 font-semibold'
-                          : 'text-slate-500 hover:text-indigo-600 hover:bg-indigo-50/60'
+                          ? 'bg-indigo-600 text-white font-bold shadow-xs'
+                          : 'text-slate-600 hover:text-indigo-700 hover:bg-indigo-50/80 bg-slate-50'
                       }`}
-                      title={speakingMessageId === msg.id ? "Stop voice playback" : "Listen to answer (Text-to-Speech)"}
+                      title={speakingMessageId === msg.id ? "Stop voice readout" : "Listen to audio readout"}
                     >
                       {speakingMessageId === msg.id ? (
                         <>
-                          <Square className="w-3 h-3 fill-current text-indigo-700" />
-                          <span className="text-[10px]">Speaking...</span>
+                          <Square className="w-3 h-3 fill-current" />
+                          <div className="flex items-center gap-0.5 h-3">
+                            <span className="w-0.5 bg-white rounded-full wave-bar"></span>
+                            <span className="w-0.5 bg-white rounded-full wave-bar [animation-delay:0.2s]"></span>
+                            <span className="w-0.5 bg-white rounded-full wave-bar [animation-delay:0.4s]"></span>
+                          </div>
+                          <span className="text-[10px]">Speaking</span>
                         </>
                       ) : (
                         <>
-                          <Volume2 className="w-3.5 h-3.5" />
-                          <span className="text-[10px]">Listen</span>
+                          <Volume2 className="w-3.5 h-3.5 text-indigo-600" />
+                          <span className="text-[10px] font-semibold">Listen</span>
                         </>
                       )}
                     </button>
 
                     <button
                       onClick={() => handleCopy(msg.id, msg.content)}
-                      className="p-1 rounded-lg text-slate-500 hover:text-indigo-600 hover:bg-indigo-50/60 transition-colors"
-                      title="Copy message"
+                      className="p-1.5 rounded-lg text-slate-500 hover:text-indigo-600 hover:bg-indigo-50/60 transition-colors"
+                      title="Copy response text"
                     >
                       {copiedId === msg.id ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
                     </button>
 
                     {msg.latency_ms && (
-                      <span className="text-[10px] text-slate-400 ml-1">
-                        • {(msg.latency_ms / 1000).toFixed(2)}s
+                      <span className="text-[10px] text-slate-400 ml-1 font-mono">
+                        {(msg.latency_ms / 1000).toFixed(2)}s
                       </span>
                     )}
                   </div>
@@ -293,12 +388,15 @@ export const ChatFeed: React.FC<ChatFeedProps> = ({
                 {msg.content}
               </div>
 
-              {/* Citations Cards (Only on assistant messages) */}
+              {/* Verified Source Citations */}
               {msg.citations && msg.citations.length > 0 && (
                 <div className="mt-4 pt-3 border-t border-slate-100">
-                  <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                    Verified Official Grounding ({msg.citations.length})
+                  <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-2 flex items-center justify-between">
+                    <span className="flex items-center gap-1.5 text-emerald-700">
+                      <ShieldCheck className="w-3.5 h-3.5" />
+                      Verified Source Grounding ({msg.citations.length})
+                    </span>
+                    <span className="text-[10px] text-slate-400 normal-case">Click to preview document snippet</span>
                   </div>
                   
                   <div className="flex flex-wrap gap-2">
@@ -306,7 +404,7 @@ export const ChatFeed: React.FC<ChatFeedProps> = ({
                       <button
                         key={cIdx}
                         onClick={() => onSelectCitation(cit)}
-                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-sky-50/80 hover:bg-sky-100/90 border border-sky-200/90 text-sky-900 text-xs font-semibold transition-all shadow-2xs hover:shadow-xs group"
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-sky-50/90 hover:bg-sky-100 border border-sky-200 text-sky-950 text-xs font-semibold transition-all shadow-2xs group"
                       >
                         <BookOpen className="w-3.5 h-3.5 text-sky-600 group-hover:scale-105 transition-transform" />
                         <span className="truncate max-w-[200px] sm:max-w-[260px]">
@@ -321,19 +419,19 @@ export const ChatFeed: React.FC<ChatFeedProps> = ({
                 </div>
               )}
 
-              {/* Follow-up Suggestions */}
+              {/* Follow-up Recommendations */}
               {msg.suggested_followups && msg.suggested_followups.length > 0 && (
-                <div className="mt-3 pt-2.5 border-t border-slate-100">
-                  <div className="text-[10px] uppercase font-bold text-slate-500 tracking-wider mb-1.5 flex items-center gap-1">
+                <div className="mt-3.5 pt-2.5 border-t border-slate-100">
+                  <div className="text-[10px] uppercase font-bold text-slate-500 tracking-wider mb-2 flex items-center gap-1">
                     <HelpCircle className="w-3 h-3 text-amber-500" />
-                    Recommended Follow-ups
+                    Recommended Follow-up Questions
                   </div>
                   <div className="flex flex-wrap gap-1.5">
                     {msg.suggested_followups.map((f, fIdx) => (
                       <button
                         key={fIdx}
                         onClick={() => onSendMessage(f)}
-                        className="text-xs text-slate-700 hover:text-indigo-900 bg-slate-50 hover:bg-indigo-50/80 px-2.5 py-1 rounded-xl transition-colors text-left font-medium border border-slate-200/60"
+                        className="text-xs text-slate-700 hover:text-indigo-950 bg-slate-50 hover:bg-indigo-50/90 px-3 py-1.5 rounded-xl transition-all text-left font-medium border border-slate-200/60 shadow-2xs"
                       >
                         • {f}
                       </button>
@@ -342,11 +440,11 @@ export const ChatFeed: React.FC<ChatFeedProps> = ({
                 </div>
               )}
 
-              {/* Feedback Controls (For assistant responses) */}
+              {/* Feedback Controls */}
               {msg.role === 'assistant' && (
                 <div className="mt-3 pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
                   <span className="text-[10px] font-semibold text-slate-500">
-                    {msg.status === 'answered_with_evidence' && '✅ Institutional Policy Match'}
+                    {msg.status === 'answered_with_evidence' && '✅ Grounded in RVITM Policy'}
                     {msg.status === 'insufficient_evidence' && '⚠️ Insufficient Evidence (Abstained)'}
                     {msg.status === 'clarification_needed' && 'ℹ️ Clarification Needed'}
                     {msg.status === 'out_of_scope' && '🚫 Non-College Question'}
@@ -388,8 +486,8 @@ export const ChatFeed: React.FC<ChatFeedProps> = ({
                 <span className="w-2 h-2 rounded-full bg-indigo-600 animate-bounce [animation-delay:0.2s]"></span>
                 <span className="w-2 h-2 rounded-full bg-indigo-600 animate-bounce [animation-delay:0.4s]"></span>
               </div>
-              <span className="text-xs text-slate-600 font-medium">
-                Retrieving institutional sources & synthesizing response...
+              <span className="text-xs text-slate-600 font-semibold">
+                OpenRouter synthesis with verified RVITM citations in progress...
               </span>
             </div>
           </div>
@@ -398,7 +496,7 @@ export const ChatFeed: React.FC<ChatFeedProps> = ({
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Voice Listening Active Wave Dock */}
+      {/* Voice Listening Active Wave Bar */}
       {isListening && (
         <div className="mb-2 p-3.5 motion-glass rounded-2xl flex items-center justify-between animate-fade-in border-indigo-200/80 shadow-md">
           <div className="flex items-center gap-3">
@@ -432,14 +530,42 @@ export const ChatFeed: React.FC<ChatFeedProps> = ({
         </div>
       )}
 
+      {/* Quick Topic Chips above Omni-Dock */}
+      <div className="hidden sm:flex items-center justify-center gap-2 pb-1.5">
+        <button
+          onClick={() => onSendMessage("What is the minimum attendance requirement at RVITM?")}
+          className="text-[11px] font-semibold text-slate-600 hover:text-indigo-800 bg-white/80 hover:bg-white px-2.5 py-1 rounded-full border border-slate-200/80 shadow-2xs transition-all"
+        >
+          ⚡ Attendance Rule
+        </button>
+        <button
+          onClick={() => onSendMessage("How do I apply for a Bonafide Certificate at RVITM?")}
+          className="text-[11px] font-semibold text-slate-600 hover:text-indigo-800 bg-white/80 hover:bg-white px-2.5 py-1 rounded-full border border-slate-200/80 shadow-2xs transition-all"
+        >
+          📜 Bonafide Form
+        </button>
+        <button
+          onClick={() => onSendMessage("When are CIE-1 and SEE exams scheduled?")}
+          className="text-[11px] font-semibold text-slate-600 hover:text-indigo-800 bg-white/80 hover:bg-white px-2.5 py-1 rounded-full border border-slate-200/80 shadow-2xs transition-all"
+        >
+          🎓 Exam Dates
+        </button>
+        <button
+          onClick={() => onSendMessage("What are the SSP scholarship criteria?")}
+          className="text-[11px] font-semibold text-slate-600 hover:text-indigo-800 bg-white/80 hover:bg-white px-2.5 py-1 rounded-full border border-slate-200/80 shadow-2xs transition-all"
+        >
+          💰 Scholarships
+        </button>
+      </div>
+
       {/* Floating Glass Dock Input Bar */}
-      <div className="pb-4 pt-1">
+      <div className="pb-3 pt-1">
         <form onSubmit={handleSubmit} className="relative flex items-center motion-glass rounded-2xl sm:rounded-3xl p-1.5 shadow-xl shadow-indigo-950/5 border border-white/80">
           <input
             type="text"
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
-            placeholder="Ask about attendance, bonafide certificates, CIE exams, or click mic..."
+            placeholder="Ask anything or click mic to speak in English, Kannada, or Hindi..."
             disabled={isLoading}
             className="w-full bg-transparent text-slate-900 placeholder-slate-400 text-xs sm:text-sm pl-4 pr-24 py-3 focus:outline-none font-medium"
           />
@@ -471,7 +597,7 @@ export const ChatFeed: React.FC<ChatFeedProps> = ({
           </div>
         </form>
         <p className="text-[10px] text-center text-slate-500 mt-2 font-medium">
-          Source-grounded in RVITM circulars & VTU regulations. Click <strong>Listen</strong> on any response for audio readout.
+          Source-grounded in RVITM circulars & VTU regulations. Powered by OpenRouter live model.
         </p>
       </div>
 
@@ -531,4 +657,5 @@ export const ChatFeed: React.FC<ChatFeedProps> = ({
     </div>
   );
 };
+
 
