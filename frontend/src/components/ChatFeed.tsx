@@ -81,6 +81,17 @@ const BENTO_SECTIONS = [
   }
 ];
 
+const sanitizeContent = (text: string) => {
+  if (!text) return '';
+  return text
+    .replace(/\[DOC:[^\]]+\]/gi, '')
+    .replace(/\[Document:[^\]]+\]/gi, '')
+    .replace(/\[Chunk:[^\]]+\]/gi, '')
+    .replace(/\s+([.,;:!?])/g, '$1')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+};
+
 export const ChatFeed: React.FC<ChatFeedProps> = ({
   messages,
   isLoading,
@@ -109,12 +120,12 @@ export const ChatFeed: React.FC<ChatFeedProps> = ({
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, isLoading]);
 
-  // Auto-speak new assistant message if autoSpeak is enabled
+  // Auto-speak new assistant message if autoSpeak is enabled (with sanitized text)
   useEffect(() => {
     if (autoSpeak && messages.length > 0) {
       const lastMsg = messages[messages.length - 1];
       if (lastMsg.role === 'assistant' && lastMsg.content) {
-        handleSpeak(lastMsg.id, lastMsg.content, lastMsg.language || currentLanguage);
+        handleSpeak(lastMsg.id, sanitizeContent(lastMsg.content), lastMsg.language || currentLanguage);
       }
     }
   }, [messages, autoSpeak]);
@@ -340,7 +351,7 @@ export const ChatFeed: React.FC<ChatFeedProps> = ({
                 {msg.role === 'assistant' && (
                   <div className="flex items-center gap-1">
                     <button
-                      onClick={() => handleSpeak(msg.id, msg.content, msg.language || currentLanguage)}
+                      onClick={() => handleSpeak(msg.id, sanitizeContent(msg.content), msg.language || currentLanguage)}
                       className={`px-2.5 py-1 rounded-xl text-xs transition-colors flex items-center gap-1.5 ${
                         speakingMessageId === msg.id
                           ? 'bg-indigo-600 text-white font-bold shadow-xs'
@@ -367,7 +378,7 @@ export const ChatFeed: React.FC<ChatFeedProps> = ({
                     </button>
 
                     <button
-                      onClick={() => handleCopy(msg.id, msg.content)}
+                      onClick={() => handleCopy(msg.id, sanitizeContent(msg.content))}
                       className="p-1.5 rounded-lg text-slate-500 hover:text-indigo-600 hover:bg-indigo-50/60 transition-colors"
                       title="Copy response text"
                     >
@@ -379,7 +390,7 @@ export const ChatFeed: React.FC<ChatFeedProps> = ({
 
               {/* Message Content */}
               <div className="text-sm leading-relaxed whitespace-pre-wrap selection:bg-indigo-100 font-normal">
-                {msg.content}
+                {sanitizeContent(msg.content)}
               </div>
 
               {/* Verified Source Citations - Only shown when answered with evidence */}

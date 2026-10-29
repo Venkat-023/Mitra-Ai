@@ -139,6 +139,13 @@ class AnswerGenerationService:
             followups = []
             status_val = AnswerabilityStatus.ANSWERED_WITH_EVIDENCE.value
 
+        # Strip internal [DOC: ...] bracketed tags so users never see raw document IDs
+        import re
+        ans_text = re.sub(r'\[DOC:[^\]]+\]', '', ans_text, flags=re.IGNORECASE)
+        ans_text = re.sub(r'\[Document:[^\]]+\]', '', ans_text, flags=re.IGNORECASE)
+        ans_text = re.sub(r'\[Chunk:[^\]]+\]', '', ans_text, flags=re.IGNORECASE)
+        ans_text = re.sub(r'\s+([.,;:!?])', r'\1', ans_text)
+        ans_text = re.sub(r'[ \t]{2,}', ' ', ans_text).strip()
 
         return ChatResponse(
             conversation_id=conv_id,
