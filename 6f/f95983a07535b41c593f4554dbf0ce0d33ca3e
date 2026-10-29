@@ -1,0 +1,22 @@
+backend/app/services/nlp/intent_extractor.py
+  h_cd8a6bfed30f7c 1-161
+backend/app/services/nlp/language_detector.py
+  h_cd8a6bfed30f7c 1-107
+backend/app/services/nlp/query_normalizer.py
+  h_cd8a6bfed30f7c 1-92
+backend/app/services/nlp/service.py
+  h_cd8a6bfed30f7c 1-60
+backend/tests/test_nlp.py
+  h_cd8a6bfed30f7c 1-76
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "6ff95983a07535b41c593f4554dbf0ce0d33ca3e",
+  "prompts": {},
+  "humans": {
+    "h_cd8a6bfed30f7c": {
+      "author": "sw <sw@sws-MacBook-Pro.local>"
+    }
+  }
+}
