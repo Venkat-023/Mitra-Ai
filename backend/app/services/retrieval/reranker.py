@@ -15,7 +15,8 @@ class MultilingualReranker:
         query_terms = set(re.findall(r'[\w\-]+|[\u0900-\u097F]+|[\u0C80-\u0CFF]+', query.lower()))
         
         for chunk in candidates:
-            score = chunk.rrf_score
+            # Composite score combining dense semantic, sparse lexical, and RRF rank signals
+            score = (0.5 * chunk.semantic_score) + (0.5 * chunk.lexical_score) + (chunk.rrf_score * 5.0)
             content_lower = chunk.content.lower()
             section_lower = chunk.section_title.lower()
 

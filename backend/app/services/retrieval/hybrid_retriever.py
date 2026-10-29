@@ -133,7 +133,14 @@ class HybridRetriever:
         # 5. Rerank top candidates
         top_chunks = self.reranker.rerank(query, candidates, top_n=fused_top_k)
         max_score = top_chunks[0].final_score if top_chunks else 0.0
-        is_grounded = max_score >= settings.SIMILARITY_THRESHOLD or (top_chunks and top_chunks[0].semantic_score >= 0.5)
+        # Calibrated grounding threshold
+        is_grounded = bool(
+            top_chunks and (
+                top_chunks[0].final_score >= 0.15 or
+                top_chunks[0].semantic_score >= 0.35 or
+                top_chunks[0].lexical_score >= 0.10
+            )
+        )
 
         return RetrievalResult(
             query=query,
