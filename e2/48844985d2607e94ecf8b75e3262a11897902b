@@ -1,0 +1,14 @@
+backend/app/services/generation/prompt_templates.py
+  h_cd8a6bfed30f7c 6-11,14-16,21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "e248844985d2607e94ecf8b75e3262a11897902b",
+  "prompts": {},
+  "humans": {
+    "h_cd8a6bfed30f7c": {
+      "author": "sw <sw@sws-MacBook-Pro.local>"
+    }
+  }
+}
