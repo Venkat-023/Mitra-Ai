@@ -1,0 +1,22 @@
+PROJECT_STATUS.md
+  h_cd8a6bfed30f7c 4-6,12-27,31,33-73,77,79-84,88-102
+README.md
+  h_cd8a6bfed30f7c 1-186
+docs/api/API_REFERENCE.md
+  h_cd8a6bfed30f7c 1-102
+docs/architecture/LIMITATIONS_AND_FUTURE_WORK.md
+  h_cd8a6bfed30f7c 1-27
+scripts/demo.py
+  h_cd8a6bfed30f7c 1-133
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "8d6bcf9a8a4f0a93a54da33b839d5a56bb43b65c",
+  "prompts": {},
+  "humans": {
+    "h_cd8a6bfed30f7c": {
+      "author": "sw <sw@sws-MacBook-Pro.local>"
+    }
+  }
+}
