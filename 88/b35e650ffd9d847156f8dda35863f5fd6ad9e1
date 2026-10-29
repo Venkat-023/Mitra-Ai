@@ -1,0 +1,46 @@
+frontend/index.html
+  h_cd8a6bfed30f7c 1-18
+frontend/package-lock.json
+  h_cd8a6bfed30f7c 1-2858
+frontend/package.json
+  h_cd8a6bfed30f7c 1-28
+frontend/postcss.config.js
+  h_cd8a6bfed30f7c 1-6
+frontend/src/App.tsx
+  h_cd8a6bfed30f7c 1-144
+frontend/src/components/AdminPortal.tsx
+  h_cd8a6bfed30f7c 1-482
+frontend/src/components/ChatFeed.tsx
+  h_cd8a6bfed30f7c 1-329
+frontend/src/components/Header.tsx
+  h_cd8a6bfed30f7c 1-136
+frontend/src/components/SourceDrawer.tsx
+  h_cd8a6bfed30f7c 1-129
+frontend/src/components/WorkflowsView.tsx
+  h_cd8a6bfed30f7c 1-360
+frontend/src/index.css
+  h_cd8a6bfed30f7c 1-50
+frontend/src/main.tsx
+  h_cd8a6bfed30f7c 1-10
+frontend/src/services/api.ts
+  h_cd8a6bfed30f7c 1-135
+frontend/src/types.ts
+  h_cd8a6bfed30f7c 1-84
+frontend/tailwind.config.js
+  h_cd8a6bfed30f7c 1-27
+frontend/tsconfig.json
+  h_cd8a6bfed30f7c 1-20
+frontend/vite.config.ts
+  h_cd8a6bfed30f7c 1-15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "88b35e650ffd9d847156f8dda35863f5fd6ad9e1",
+  "prompts": {},
+  "humans": {
+    "h_cd8a6bfed30f7c": {
+      "author": "sw <sw@sws-MacBook-Pro.local>"
+    }
+  }
+}
