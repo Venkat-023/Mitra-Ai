@@ -1,0 +1,26 @@
+backend/app/services/generation/answer_service.py
+  h_cd8a6bfed30f7c 1-140
+backend/app/services/generation/api_providers.py
+  h_cd8a6bfed30f7c 1-69
+backend/app/services/generation/factory.py
+  h_cd8a6bfed30f7c 1-23
+backend/app/services/generation/mock_provider.py
+  h_cd8a6bfed30f7c 1-87
+backend/app/services/generation/prompt_templates.py
+  h_cd8a6bfed30f7c 1-31
+backend/app/services/generation/provider.py
+  h_cd8a6bfed30f7c 1-7
+backend/tests/test_generation.py
+  h_cd8a6bfed30f7c 1-110
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "db6730a7921be7e11b8f34d5a690433611bbe7d4",
+  "prompts": {},
+  "humans": {
+    "h_cd8a6bfed30f7c": {
+      "author": "sw <sw@sws-MacBook-Pro.local>"
+    }
+  }
+}
