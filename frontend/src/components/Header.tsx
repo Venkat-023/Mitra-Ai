@@ -1,6 +1,6 @@
 import React from 'react';
 import { Language } from '../types';
-import { Globe, ShieldCheck, Compass, MessageSquareText, Volume2, VolumeX, Settings } from 'lucide-react';
+import { Globe, ShieldCheck, Compass, MessageSquareText, Volume2, VolumeX, Settings, Sparkles } from 'lucide-react';
 
 interface HeaderProps {
   currentLanguage: Language;
@@ -22,109 +22,119 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenSettings
 }) => {
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-slate-200/80 bg-white/85 backdrop-blur-md shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <header className="w-full max-w-6xl mx-auto motion-glass rounded-2xl sm:rounded-3xl border border-white/80 shadow-lg shadow-indigo-950/5 transition-all">
+      <div className="px-4 sm:px-6">
         <div className="flex items-center justify-between h-16 sm:h-20">
           
           {/* Institutional Branding */}
-          <div className="flex items-center space-x-3 cursor-pointer" onClick={() => onTabChange('chat')}>
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-br from-blue-700 via-indigo-700 to-sky-600 flex items-center justify-center shadow-md shadow-blue-500/20 border border-blue-100">
-              <span className="font-bold text-white text-base sm:text-lg tracking-wider">RV</span>
+          <div 
+            className="flex items-center space-x-3 cursor-pointer group select-none" 
+            onClick={() => onTabChange('chat')}
+          >
+            <div className="relative">
+              <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-indigo-600 via-blue-600 to-sky-500 flex items-center justify-center shadow-md shadow-indigo-500/20 text-white font-bold text-sm tracking-wide group-hover:scale-105 transition-transform duration-300">
+                RV
+              </div>
+              <span className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-white flex items-center justify-center">
+                <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
+              </span>
             </div>
+
             <div>
               <div className="flex items-center space-x-2">
-                <h1 className="text-base sm:text-lg font-bold text-slate-900 tracking-tight flex items-center gap-1.5">
+                <h1 className="text-sm sm:text-base font-bold text-slate-900 tracking-tight flex items-center gap-1.5">
                   RVITM Mitra AI
-                  <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1 animate-pulse"></span>
-                    Verified
+                  <span className="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold shimmer-badge text-indigo-700 border border-indigo-200/60">
+                    <Sparkles className="w-2.5 h-2.5 mr-1 text-indigo-600" />
+                    Campus AI
                   </span>
                 </h1>
               </div>
-              <p className="text-xs text-slate-500 font-medium">
-                ಆರ್.ವಿ.ಐ.ಟಿ.ಎಂ ಮಿತ್ರ • आरवीआईटीएम मित्र • RSST Trust
+              <p className="text-[11px] text-slate-500 font-medium tracking-tight">
+                ಆರ್.ವಿ.ಐ.ಟಿ.ಎಂ ಮಿತ್ರ • Grounded College Intelligence
               </p>
             </div>
           </div>
 
-          {/* Nav Tabs */}
-          <nav className="hidden md:flex items-center space-x-1 bg-slate-100/80 p-1.5 rounded-2xl border border-slate-200/80 shadow-inner">
+          {/* MotionSites Liquid Pill Navigation */}
+          <nav className="hidden md:flex items-center space-x-1 bg-slate-100/70 p-1 rounded-2xl border border-slate-200/60 backdrop-blur-sm">
             <button
               onClick={() => onTabChange('chat')}
-              className={`flex items-center space-x-2 px-4 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
+              className={`flex items-center space-x-2 px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-200 ${
                 activeTab === 'chat'
-                  ? 'bg-white text-blue-700 shadow-sm border border-slate-200/60'
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-white/50'
+                  ? 'motion-pill-active'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-white/40'
               }`}
             >
-              <MessageSquareText className="w-4 h-4 text-blue-600" />
+              <MessageSquareText className="w-3.5 h-3.5 text-indigo-600" />
               <span>Assistant</span>
             </button>
 
             <button
               onClick={() => onTabChange('workflows')}
-              className={`flex items-center space-x-2 px-4 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
+              className={`flex items-center space-x-2 px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-200 ${
                 activeTab === 'workflows'
-                  ? 'bg-white text-blue-700 shadow-sm border border-slate-200/60'
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-white/50'
+                  ? 'motion-pill-active'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-white/40'
               }`}
             >
-              <Compass className="w-4 h-4 text-indigo-600" />
+              <Compass className="w-3.5 h-3.5 text-blue-600" />
               <span>Campus Services</span>
             </button>
 
             <button
               onClick={() => onTabChange('admin')}
-              className={`flex items-center space-x-2 px-4 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
+              className={`flex items-center space-x-2 px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-200 ${
                 activeTab === 'admin'
-                  ? 'bg-white text-amber-700 shadow-sm border border-slate-200/60'
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-white/50'
+                  ? 'motion-pill-active'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-white/40'
               }`}
             >
-              <ShieldCheck className="w-4 h-4 text-amber-600" />
-              <span>Admin Portal</span>
+              <ShieldCheck className="w-3.5 h-3.5 text-amber-600" />
+              <span>Governance</span>
             </button>
           </nav>
 
-          {/* Right Controls: Voice Toggle, Settings, Language Selector */}
-          <div className="flex items-center space-x-2 sm:space-x-3">
+          {/* Right Controls: Auto-Voice, AI Settings, Language Selector */}
+          <div className="flex items-center space-x-2 sm:space-x-2.5">
             
             {/* Auto-Speech Toggle */}
             <button
               onClick={onToggleAutoSpeak}
-              title={autoSpeak ? "Auto-Voice: Enabled (Agent will speak answers)" : "Auto-Voice: Disabled"}
-              className={`p-2 rounded-xl border transition-all flex items-center gap-1.5 text-xs font-medium ${
+              title={autoSpeak ? "Voice Output Active (Mitra will read out answers)" : "Voice Output Muted"}
+              className={`p-2 sm:px-3 sm:py-2 rounded-xl border transition-all duration-200 flex items-center gap-1.5 text-xs font-semibold ${
                 autoSpeak
-                  ? 'bg-blue-50 border-blue-200 text-blue-700 shadow-sm'
-                  : 'bg-slate-50 border-slate-200 text-slate-500 hover:text-slate-700'
+                  ? 'bg-indigo-50/90 border-indigo-200 text-indigo-700 shadow-xs'
+                  : 'bg-white/60 border-slate-200 text-slate-500 hover:text-slate-700 hover:bg-white'
               }`}
             >
-              {autoSpeak ? <Volume2 className="w-4 h-4 text-blue-600" /> : <VolumeX className="w-4 h-4" />}
-              <span className="hidden lg:inline">{autoSpeak ? 'Voice On' : 'Voice Off'}</span>
+              {autoSpeak ? <Volume2 className="w-4 h-4 text-indigo-600 animate-pulse" /> : <VolumeX className="w-4 h-4" />}
+              <span className="hidden lg:inline">{autoSpeak ? 'Voice On' : 'Muted'}</span>
             </button>
 
-            {/* AI Settings Modal Toggle */}
+            {/* AI Provider & API Settings */}
             <button
               onClick={onOpenSettings}
-              title="AI Provider & API Key Settings"
-              className="p-2 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-600 hover:text-slate-800 transition-colors"
+              title="AI Provider Engine & Keys"
+              className="p-2 sm:px-3 sm:py-2 rounded-xl bg-white/70 hover:bg-white border border-slate-200 text-slate-600 hover:text-slate-900 transition-colors shadow-xs flex items-center gap-1.5 text-xs font-semibold"
             >
               <Settings className="w-4 h-4" />
+              <span className="hidden xl:inline">AI Engine</span>
             </button>
 
             {/* Trilingual Language Selector */}
             <div className="relative inline-flex items-center">
-              <Globe className="w-4 h-4 text-slate-400 absolute left-3 pointer-events-none" />
+              <Globe className="w-3.5 h-3.5 text-slate-400 absolute left-3 pointer-events-none" />
               <select
                 aria-label="Select Assistant Response Language"
                 value={currentLanguage}
                 onChange={(e) => onLanguageChange(e.target.value as Language)}
-                className="bg-white border border-slate-300 text-slate-800 text-xs sm:text-sm rounded-xl pl-9 pr-8 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-semibold cursor-pointer shadow-sm transition-all"
+                className="bg-white/90 border border-slate-200/90 text-slate-800 text-xs rounded-xl pl-8 pr-7 py-2 font-semibold cursor-pointer shadow-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 hover:bg-white transition-all"
               >
-                <option value="auto">🌐 Auto Detect (ಸ್ವಯಂ)</option>
+                <option value="auto">🌐 Auto (ಸ್ವಯಂ)</option>
                 <option value="en">🇬🇧 English</option>
-                <option value="kn">🇮🇳 ಕನ್ನಡ (Kannada)</option>
-                <option value="hi">🇮🇳 हिन्दी (Hindi)</option>
+                <option value="kn">🇮🇳 ಕನ್ನಡ</option>
+                <option value="hi">🇮🇳 हिन्दी</option>
               </select>
             </div>
           </div>
@@ -133,11 +143,11 @@ export const Header: React.FC<HeaderProps> = ({
       </div>
 
       {/* Mobile Nav Tabs */}
-      <div className="flex md:hidden border-t border-slate-200 bg-white/95 px-4 py-2 justify-around shadow-sm">
+      <div className="flex md:hidden border-t border-slate-200/60 bg-white/70 backdrop-blur-sm px-3 py-2 justify-around rounded-b-2xl">
         <button
           onClick={() => onTabChange('chat')}
-          className={`flex items-center space-x-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold ${
-            activeTab === 'chat' ? 'bg-blue-50 text-blue-700 border border-blue-200' : 'text-slate-500'
+          className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold ${
+            activeTab === 'chat' ? 'bg-indigo-50 text-indigo-700 border border-indigo-200' : 'text-slate-500'
           }`}
         >
           <MessageSquareText className="w-3.5 h-3.5" />
@@ -145,8 +155,8 @@ export const Header: React.FC<HeaderProps> = ({
         </button>
         <button
           onClick={() => onTabChange('workflows')}
-          className={`flex items-center space-x-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold ${
-            activeTab === 'workflows' ? 'bg-blue-50 text-blue-700 border border-blue-200' : 'text-slate-500'
+          className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold ${
+            activeTab === 'workflows' ? 'bg-indigo-50 text-indigo-700 border border-indigo-200' : 'text-slate-500'
           }`}
         >
           <Compass className="w-3.5 h-3.5" />
@@ -154,7 +164,7 @@ export const Header: React.FC<HeaderProps> = ({
         </button>
         <button
           onClick={() => onTabChange('admin')}
-          className={`flex items-center space-x-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold ${
+          className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold ${
             activeTab === 'admin' ? 'bg-amber-50 text-amber-700 border border-amber-200' : 'text-slate-500'
           }`}
         >
@@ -165,3 +175,4 @@ export const Header: React.FC<HeaderProps> = ({
     </header>
   );
 };
+

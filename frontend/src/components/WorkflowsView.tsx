@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { 
   FileCheck, Calendar, Award, PhoneCall, CheckCircle2, ArrowRight,
-  Building, Clock
+  Building, Clock, Sparkles
 } from 'lucide-react';
 
 interface WorkflowProps {
@@ -12,124 +12,136 @@ export const WorkflowsView: React.FC<WorkflowProps> = ({ onStartChatQuery }) => 
   const [selectedWorkflow, setSelectedWorkflow] = useState<'bonafide' | 'calendar' | 'scholarship' | 'contacts'>('bonafide');
 
   return (
-    <div className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-8 overflow-y-auto">
+    <div className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 overflow-y-auto">
       
       {/* Title & Introduction */}
-      <div className="mb-8 text-center max-w-2xl mx-auto">
-        <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
+      <div className="mb-6 sm:mb-8 text-center max-w-2xl mx-auto">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold shimmer-badge text-indigo-700 border border-indigo-200/60 mb-3 shadow-xs">
+          <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
+          Interactive Campus Guides
+        </div>
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
           RVITM Procedural Campus Services
         </h2>
-        <p className="mt-2 text-sm text-slate-600">
-          Step-by-step guidance derived directly from approved institutional circulars.
+        <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+          Verified step-by-step guidance derived directly from approved institutional circulars & VTU regulations.
         </p>
       </div>
 
-      {/* Workflow Tabs */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
+      {/* MotionSites Interactive Workflow Tabs */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6 sm:mb-8">
         <button
           onClick={() => setSelectedWorkflow('bonafide')}
-          className={`p-4 rounded-2xl text-left border transition-all ${
+          className={`p-4 rounded-2xl text-left transition-all duration-200 flex flex-col justify-between ${
             selectedWorkflow === 'bonafide'
-              ? 'bg-blue-50/90 border-blue-400 text-blue-950 shadow-sm'
-              : 'bg-white border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+              ? 'bg-white border-2 border-indigo-500 shadow-md shadow-indigo-500/10 scale-[1.02]'
+              : 'motion-card hover:border-indigo-300'
           }`}
         >
-          <FileCheck className={`w-6 h-6 mb-2 ${selectedWorkflow === 'bonafide' ? 'text-blue-600' : 'text-slate-400'}`} />
-          <div className="font-bold text-sm">Bonafide Certificate</div>
-          <div className="text-xs text-slate-500 mt-0.5">Application procedure</div>
+          <FileCheck className={`w-6 h-6 mb-2 ${selectedWorkflow === 'bonafide' ? 'text-indigo-600' : 'text-slate-400'}`} />
+          <div>
+            <div className={`font-bold text-sm ${selectedWorkflow === 'bonafide' ? 'text-indigo-950' : 'text-slate-800'}`}>Bonafide Certificate</div>
+            <div className="text-[11px] text-slate-500 mt-0.5">Application procedure</div>
+          </div>
         </button>
 
         <button
           onClick={() => setSelectedWorkflow('calendar')}
-          className={`p-4 rounded-2xl text-left border transition-all ${
+          className={`p-4 rounded-2xl text-left transition-all duration-200 flex flex-col justify-between ${
             selectedWorkflow === 'calendar'
-              ? 'bg-blue-50/90 border-blue-400 text-blue-950 shadow-sm'
-              : 'bg-white border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+              ? 'bg-white border-2 border-indigo-500 shadow-md shadow-indigo-500/10 scale-[1.02]'
+              : 'motion-card hover:border-indigo-300'
           }`}
         >
-          <Calendar className={`w-6 h-6 mb-2 ${selectedWorkflow === 'calendar' ? 'text-blue-600' : 'text-slate-400'}`} />
-          <div className="font-bold text-sm">Exam & CIE Dates</div>
-          <div className="text-xs text-slate-500 mt-0.5">Academic calendar 2026</div>
+          <Calendar className={`w-6 h-6 mb-2 ${selectedWorkflow === 'calendar' ? 'text-indigo-600' : 'text-slate-400'}`} />
+          <div>
+            <div className={`font-bold text-sm ${selectedWorkflow === 'calendar' ? 'text-indigo-950' : 'text-slate-800'}`}>Exam & CIE Dates</div>
+            <div className="text-[11px] text-slate-500 mt-0.5">Academic calendar 2026</div>
+          </div>
         </button>
 
         <button
           onClick={() => setSelectedWorkflow('scholarship')}
-          className={`p-4 rounded-2xl text-left border transition-all ${
+          className={`p-4 rounded-2xl text-left transition-all duration-200 flex flex-col justify-between ${
             selectedWorkflow === 'scholarship'
-              ? 'bg-blue-50/90 border-blue-400 text-blue-950 shadow-sm'
-              : 'bg-white border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+              ? 'bg-white border-2 border-indigo-500 shadow-md shadow-indigo-500/10 scale-[1.02]'
+              : 'motion-card hover:border-indigo-300'
           }`}
         >
-          <Award className={`w-6 h-6 mb-2 ${selectedWorkflow === 'scholarship' ? 'text-blue-600' : 'text-slate-400'}`} />
-          <div className="font-bold text-sm">Scholarships & SSP</div>
-          <div className="text-xs text-slate-500 mt-0.5">State & central schemes</div>
+          <Award className={`w-6 h-6 mb-2 ${selectedWorkflow === 'scholarship' ? 'text-indigo-600' : 'text-slate-400'}`} />
+          <div>
+            <div className={`font-bold text-sm ${selectedWorkflow === 'scholarship' ? 'text-indigo-950' : 'text-slate-800'}`}>Scholarships & SSP</div>
+            <div className="text-[11px] text-slate-500 mt-0.5">State & central schemes</div>
+          </div>
         </button>
 
         <button
           onClick={() => setSelectedWorkflow('contacts')}
-          className={`p-4 rounded-2xl text-left border transition-all ${
+          className={`p-4 rounded-2xl text-left transition-all duration-200 flex flex-col justify-between ${
             selectedWorkflow === 'contacts'
-              ? 'bg-blue-50/90 border-blue-400 text-blue-950 shadow-sm'
-              : 'bg-white border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+              ? 'bg-white border-2 border-indigo-500 shadow-md shadow-indigo-500/10 scale-[1.02]'
+              : 'motion-card hover:border-indigo-300'
           }`}
         >
-          <PhoneCall className={`w-6 h-6 mb-2 ${selectedWorkflow === 'contacts' ? 'text-blue-600' : 'text-slate-400'}`} />
-          <div className="font-bold text-sm">Campus Directory</div>
-          <div className="text-xs text-slate-500 mt-0.5">HoDs & Administration</div>
+          <PhoneCall className={`w-6 h-6 mb-2 ${selectedWorkflow === 'contacts' ? 'text-indigo-600' : 'text-slate-400'}`} />
+          <div>
+            <div className={`font-bold text-sm ${selectedWorkflow === 'contacts' ? 'text-indigo-950' : 'text-slate-800'}`}>Campus Directory</div>
+            <div className="text-[11px] text-slate-500 mt-0.5">HoDs & Administration</div>
+          </div>
         </button>
       </div>
 
-      {/* Active Workflow Content */}
-      <div className="bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-8 shadow-sm animate-fade-in">
+      {/* Active Workflow Content Card */}
+      <div className="motion-card rounded-3xl p-6 sm:p-8 shadow-md animate-fade-in">
         
         {/* WORKFLOW 1: BONAFIDE CERTIFICATE */}
         {selectedWorkflow === 'bonafide' && (
           <div className="space-y-6">
             <div className="border-b border-slate-100 pb-4">
-              <span className="text-xs font-bold text-blue-600 uppercase tracking-wider">
+              <span className="text-[11px] font-bold text-indigo-600 uppercase tracking-wider bg-indigo-50 px-2 py-0.5 rounded-md border border-indigo-200/50">
                 Procedural Guide • Academic Affairs
               </span>
-              <h3 className="text-xl font-bold text-slate-900 mt-1">
+              <h3 className="text-xl font-bold text-slate-900 mt-2">
                 How to Apply for an Official Bonafide / Study Certificate
               </h3>
-              <p className="text-sm text-slate-600 mt-1">
+              <p className="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">
                 Issued for bank education loans, passport applications, scholarship portals (SSP/NSP), and bus passes.
               </p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-6">
               <div className="md:col-span-2 space-y-4">
-                <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+                <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider">
                   Mandatory Application Checklist
                 </h4>
 
                 <div className="space-y-3">
-                  <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-slate-50/70 border border-slate-200/80">
-                    <span className="w-6 h-6 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-xs shrink-0">1</span>
+                  <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-white/70 border border-slate-200/80 shadow-2xs">
+                    <span className="w-6 h-6 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-xs shrink-0">1</span>
                     <div>
                       <div className="text-sm font-bold text-slate-900">Download or Collect Application Form</div>
                       <p className="text-xs text-slate-600 mt-0.5">Collect from Counter No. 2 (Administrative Block, Ground Floor) between 10:00 AM and 1:00 PM, or download via student ERP.</p>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-slate-50/70 border border-slate-200/80">
-                    <span className="w-6 h-6 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-xs shrink-0">2</span>
+                  <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-white/70 border border-slate-200/80 shadow-2xs">
+                    <span className="w-6 h-6 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-xs shrink-0">2</span>
                     <div>
                       <div className="text-sm font-bold text-slate-900">Attach Required Enclosures</div>
                       <p className="text-xs text-slate-600 mt-0.5">Attach photocopy of your Student Smart ID Card and latest semester fee receipt.</p>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-slate-50/70 border border-slate-200/80">
-                    <span className="w-6 h-6 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-xs shrink-0">3</span>
+                  <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-white/70 border border-slate-200/80 shadow-2xs">
+                    <span className="w-6 h-6 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-xs shrink-0">3</span>
                     <div>
                       <div className="text-sm font-bold text-slate-900">Proctor & HoD Recommendation</div>
                       <p className="text-xs text-slate-600 mt-0.5">Get the form countersigned by your Faculty Proctor and Head of Department.</p>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-slate-50/70 border border-slate-200/80">
-                    <span className="w-6 h-6 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-xs shrink-0">4</span>
+                  <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-white/70 border border-slate-200/80 shadow-2xs">
+                    <span className="w-6 h-6 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-xs shrink-0">4</span>
                     <div>
                       <div className="text-sm font-bold text-slate-900">Submission & Collection</div>
                       <p className="text-xs text-slate-600 mt-0.5">Submit at Counter 2. Turnaround time is 2-3 working days. Collect between 2:30 PM and 4:30 PM with college ID.</p>
@@ -140,26 +152,26 @@ export const WorkflowsView: React.FC<WorkflowProps> = ({ onStartChatQuery }) => 
 
               {/* Sidebar Quick Details */}
               <div className="space-y-4">
-                <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
-                  <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider">Office Details</h4>
+                <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-3">
+                  <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider">Office Details</h4>
                   
                   <div className="flex items-center gap-2.5 text-xs text-slate-700 font-medium">
-                    <Building className="w-4 h-4 text-blue-600" />
+                    <Building className="w-4 h-4 text-indigo-600" />
                     <span>Counter No. 2, Admin Block</span>
                   </div>
                   <div className="flex items-center gap-2.5 text-xs text-slate-700 font-medium">
-                    <Clock className="w-4 h-4 text-blue-600" />
+                    <Clock className="w-4 h-4 text-indigo-600" />
                     <span>10:00 AM – 1:00 PM (Submission)</span>
                   </div>
                   <div className="flex items-center gap-2.5 text-xs text-slate-700 font-medium">
-                    <PhoneCall className="w-4 h-4 text-blue-600" />
+                    <PhoneCall className="w-4 h-4 text-indigo-600" />
                     <span>+91-80-6815-5600 (Ext. 202)</span>
                   </div>
                 </div>
 
                 <button
                   onClick={() => onStartChatQuery("How do I apply for a Bonafide Certificate at RVITM?")}
-                  className="w-full py-3 px-4 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition-colors flex items-center justify-center gap-1.5 shadow-sm"
+                  className="w-full py-3 px-4 rounded-2xl bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-md shadow-indigo-500/20"
                 >
                   Ask Mitra AI for Detailed Bonafide Help
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -173,45 +185,45 @@ export const WorkflowsView: React.FC<WorkflowProps> = ({ onStartChatQuery }) => 
         {selectedWorkflow === 'calendar' && (
           <div className="space-y-6">
             <div className="border-b border-slate-100 pb-4">
-              <span className="text-xs font-bold text-blue-600 uppercase tracking-wider">
+              <span className="text-[11px] font-bold text-indigo-600 uppercase tracking-wider bg-indigo-50 px-2 py-0.5 rounded-md border border-indigo-200/50">
                 VTU Regulations • Academic Year 2026-27
               </span>
-              <h3 className="text-xl font-bold text-slate-900 mt-1">
+              <h3 className="text-xl font-bold text-slate-900 mt-2">
                 Semester Timeline, CIE Tests & SEE Examination Schedule
               </h3>
             </div>
 
             <div className="grid md:grid-cols-2 gap-4">
-              <div className="p-5 rounded-2xl bg-slate-50/70 border border-slate-200 space-y-3">
+              <div className="p-5 rounded-2xl bg-white/70 border border-slate-200 space-y-3">
                 <h4 className="text-sm font-bold text-slate-900 flex items-center gap-1.5">
-                  <Calendar className="w-4 h-4 text-blue-600" />
+                  <Calendar className="w-4 h-4 text-indigo-600" />
                   Key Semester Milestones
                 </h4>
                 <ul className="text-xs space-y-2 text-slate-700">
-                  <li className="flex justify-between py-1 border-b border-slate-200">
+                  <li className="flex justify-between py-1.5 border-b border-slate-100">
                     <span>Commencement of Classes</span>
                     <strong className="text-slate-900">Sept 1, 2026</strong>
                   </li>
-                  <li className="flex justify-between py-1 border-b border-slate-200">
+                  <li className="flex justify-between py-1.5 border-b border-slate-100">
                     <span>Continuous Internal Eval (CIE-1)</span>
-                    <strong className="text-blue-700">Oct 12 – Oct 15, 2026</strong>
+                    <strong className="text-indigo-700">Oct 12 – Oct 15, 2026</strong>
                   </li>
-                  <li className="flex justify-between py-1 border-b border-slate-200">
+                  <li className="flex justify-between py-1.5 border-b border-slate-100">
                     <span>Continuous Internal Eval (CIE-2)</span>
-                    <strong className="text-blue-700">Nov 23 – Nov 26, 2026</strong>
+                    <strong className="text-indigo-700">Nov 23 – Nov 26, 2026</strong>
                   </li>
-                  <li className="flex justify-between py-1 border-b border-slate-200">
+                  <li className="flex justify-between py-1.5 border-b border-slate-100">
                     <span>Last Working Day of Semester</span>
                     <strong className="text-slate-900">Dec 24, 2026</strong>
                   </li>
-                  <li className="flex justify-between py-1 border-b border-slate-200">
+                  <li className="flex justify-between py-1.5 border-b border-slate-100">
                     <span>Semester End Exams (SEE Theory)</span>
                     <strong className="text-emerald-700 font-bold">Jan 18 – Feb 6, 2027</strong>
                   </li>
                 </ul>
               </div>
 
-              <div className="p-5 rounded-2xl bg-slate-50/70 border border-slate-200 space-y-3">
+              <div className="p-5 rounded-2xl bg-white/70 border border-slate-200 space-y-3">
                 <h4 className="text-sm font-bold text-slate-900 flex items-center gap-1.5">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                   VTU Passing & Attendance Thresholds
@@ -219,7 +231,7 @@ export const WorkflowsView: React.FC<WorkflowProps> = ({ onStartChatQuery }) => 
                 <ul className="text-xs space-y-2.5 text-slate-700">
                   <li>
                     <strong>Mandatory Attendance: </strong>
-                    <span className="text-blue-800 font-bold">85% minimum</span> aggregate in each course (VTU Clause 8.1).
+                    <span className="text-indigo-800 font-bold">85% minimum</span> aggregate in each course (VTU Clause 8.1).
                   </li>
                   <li>
                     <strong>Medical Condonation: </strong>
@@ -239,7 +251,7 @@ export const WorkflowsView: React.FC<WorkflowProps> = ({ onStartChatQuery }) => 
 
             <button
               onClick={() => onStartChatQuery("When are the CIE and SEE exams scheduled?")}
-              className="py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition-colors flex items-center gap-1.5 shadow-sm"
+              className="py-2.5 px-4 rounded-xl bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white text-xs font-bold transition-all flex items-center gap-1.5 shadow-md shadow-indigo-500/20"
             >
               Ask Mitra AI about Exam Dates
               <ArrowRight className="w-3.5 h-3.5" />
@@ -251,16 +263,16 @@ export const WorkflowsView: React.FC<WorkflowProps> = ({ onStartChatQuery }) => 
         {selectedWorkflow === 'scholarship' && (
           <div className="space-y-6">
             <div className="border-b border-slate-100 pb-4">
-              <span className="text-xs font-bold text-blue-600 uppercase tracking-wider">
+              <span className="text-[11px] font-bold text-indigo-600 uppercase tracking-wider bg-indigo-50 px-2 py-0.5 rounded-md border border-indigo-200/50">
                 Student Welfare • Financial Assistance
               </span>
-              <h3 className="text-xl font-bold text-slate-900 mt-1">
+              <h3 className="text-xl font-bold text-slate-900 mt-2">
                 State (SSP) & National (NSP) Scholarship Assistance
               </h3>
             </div>
 
             <div className="grid md:grid-cols-2 gap-4">
-              <div className="p-5 rounded-2xl bg-slate-50/70 border border-slate-200 space-y-2 text-xs text-slate-700">
+              <div className="p-5 rounded-2xl bg-white/70 border border-slate-200 space-y-2 text-xs text-slate-700">
                 <h4 className="text-sm font-bold text-slate-900">Karnataka SSP Post-Matric</h4>
                 <p>Eligible for SC/ST, Cat-1, 2A/2B/3A/3B, and minority students domiciled in Karnataka.</p>
                 <div className="pt-2 font-semibold text-amber-700">
@@ -269,7 +281,7 @@ export const WorkflowsView: React.FC<WorkflowProps> = ({ onStartChatQuery }) => 
                 <div className="text-slate-500">Desk Officer: Smt. Anitha K., Room 104</div>
               </div>
 
-              <div className="p-5 rounded-2xl bg-slate-50/70 border border-slate-200 space-y-2 text-xs text-slate-700">
+              <div className="p-5 rounded-2xl bg-white/70 border border-slate-200 space-y-2 text-xs text-slate-700">
                 <h4 className="text-sm font-bold text-slate-900">AICTE Pragati & Central NSP</h4>
                 <p>AICTE Pragati scholarship provides Rs. 50,000 per year for admitted female students.</p>
                 <div className="text-slate-500">Family annual income must be below Rs. 8 Lakhs.</div>
@@ -279,7 +291,7 @@ export const WorkflowsView: React.FC<WorkflowProps> = ({ onStartChatQuery }) => 
 
             <button
               onClick={() => onStartChatQuery("What is the SSP scholarship application process and deadline?")}
-              className="py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition-colors flex items-center gap-1.5 shadow-sm"
+              className="py-2.5 px-4 rounded-xl bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white text-xs font-bold transition-all flex items-center gap-1.5 shadow-md shadow-indigo-500/20"
             >
               Ask Mitra AI for Scholarship Guidelines
               <ArrowRight className="w-3.5 h-3.5" />
@@ -291,51 +303,51 @@ export const WorkflowsView: React.FC<WorkflowProps> = ({ onStartChatQuery }) => 
         {selectedWorkflow === 'contacts' && (
           <div className="space-y-6">
             <div className="border-b border-slate-100 pb-4">
-              <span className="text-xs font-bold text-blue-600 uppercase tracking-wider">
+              <span className="text-[11px] font-bold text-indigo-600 uppercase tracking-wider bg-indigo-50 px-2 py-0.5 rounded-md border border-indigo-200/50">
                 Directory & Administrative Chambers
               </span>
-              <h3 className="text-xl font-bold text-slate-900 mt-1">
+              <h3 className="text-xl font-bold text-slate-900 mt-2">
                 Department Heads & Key Administrative Contacts
               </h3>
             </div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3.5 text-xs">
-              <div className="p-4 rounded-2xl bg-slate-50/80 border border-slate-200 space-y-1">
+              <div className="p-4 rounded-2xl bg-white/70 border border-slate-200 space-y-1">
                 <div className="font-bold text-slate-900 text-sm">Principal's Office</div>
                 <div className="text-slate-700">Dr. Malini M.</div>
                 <div className="text-slate-500">Admin Block, Ground Floor</div>
-                <div className="text-blue-700 font-medium">principal@rvitm.edu.in</div>
+                <div className="text-indigo-700 font-medium">principal@rvitm.edu.in</div>
               </div>
 
-              <div className="p-4 rounded-2xl bg-slate-50/80 border border-slate-200 space-y-1">
+              <div className="p-4 rounded-2xl bg-white/70 border border-slate-200 space-y-1">
                 <div className="font-bold text-slate-900 text-sm">CSE Department (HoD)</div>
                 <div className="text-slate-700">Dr. Latha Parthiban</div>
                 <div className="text-slate-500">Academic Block A, Room A-301</div>
-                <div className="text-blue-700 font-medium">hod.cse@rvitm.edu.in</div>
+                <div className="text-indigo-700 font-medium">hod.cse@rvitm.edu.in</div>
               </div>
 
-              <div className="p-4 rounded-2xl bg-slate-50/80 border border-slate-200 space-y-1">
+              <div className="p-4 rounded-2xl bg-white/70 border border-slate-200 space-y-1">
                 <div className="font-bold text-slate-900 text-sm">ISE Department (HoD)</div>
                 <div className="text-slate-700">Dr. B. Sudarshan</div>
                 <div className="text-slate-500">Academic Block A, Room A-401</div>
-                <div className="text-blue-700 font-medium">hod.ise@rvitm.edu.in</div>
+                <div className="text-indigo-700 font-medium">hod.ise@rvitm.edu.in</div>
               </div>
 
-              <div className="p-4 rounded-2xl bg-slate-50/80 border border-slate-200 space-y-1">
+              <div className="p-4 rounded-2xl bg-white/70 border border-slate-200 space-y-1">
                 <div className="font-bold text-slate-900 text-sm">ECE Department (HoD)</div>
                 <div className="text-slate-700">Dr. Girish V.</div>
                 <div className="text-slate-500">Academic Block B, Room B-201</div>
-                <div className="text-blue-700 font-medium">hod.ece@rvitm.edu.in</div>
+                <div className="text-indigo-700 font-medium">hod.ece@rvitm.edu.in</div>
               </div>
 
-              <div className="p-4 rounded-2xl bg-slate-50/80 border border-slate-200 space-y-1">
+              <div className="p-4 rounded-2xl bg-white/70 border border-slate-200 space-y-1">
                 <div className="font-bold text-slate-900 text-sm">Training & Placement (TPO)</div>
                 <div className="text-slate-700">Prof. Anand Murthy</div>
                 <div className="text-slate-500">Placement Auditorium Block</div>
-                <div className="text-blue-700 font-medium">placements@rvitm.edu.in</div>
+                <div className="text-indigo-700 font-medium">placements@rvitm.edu.in</div>
               </div>
 
-              <div className="p-4 rounded-2xl bg-slate-50/80 border border-slate-200 space-y-1">
+              <div className="p-4 rounded-2xl bg-white/70 border border-slate-200 space-y-1">
                 <div className="font-bold text-slate-900 text-sm">Anti-Ragging Squad Head</div>
                 <div className="text-slate-700">Dr. Prashanth Kumar</div>
                 <div className="text-slate-500">Helpline: 1800-180-5522</div>
@@ -345,7 +357,7 @@ export const WorkflowsView: React.FC<WorkflowProps> = ({ onStartChatQuery }) => 
 
             <button
               onClick={() => onStartChatQuery("Who is the HoD of CSE and where is the department office?")}
-              className="py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition-colors flex items-center gap-1.5 shadow-sm"
+              className="py-2.5 px-4 rounded-xl bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white text-xs font-bold transition-all flex items-center gap-1.5 shadow-md shadow-indigo-500/20"
             >
               Ask Mitra AI for Contact Numbers
               <ArrowRight className="w-3.5 h-3.5" />
@@ -358,3 +370,4 @@ export const WorkflowsView: React.FC<WorkflowProps> = ({ onStartChatQuery }) => 
     </div>
   );
 };
+

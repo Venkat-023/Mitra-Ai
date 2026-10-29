@@ -103,20 +103,30 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-800 font-sans selection:bg-blue-600 selection:text-white">
-      {/* Top Application Header */}
-      <Header
-        currentLanguage={currentLanguage}
-        onLanguageChange={setCurrentLanguage}
-        activeTab={activeTab}
-        onTabChange={setActiveTab}
-        autoSpeak={autoSpeak}
-        onToggleAutoSpeak={() => setAutoSpeak(prev => !prev)}
-        onOpenSettings={() => setIsSettingsOpen(true)}
-      />
+    <div className="min-h-screen flex flex-col bg-[#F8FAFC] text-slate-800 font-sans selection:bg-indigo-500 selection:text-white relative overflow-x-hidden">
+      
+      {/* MotionSites Ambient Living Aurora Mesh Background */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        <div className="absolute -top-32 -left-32 w-[34rem] h-[34rem] rounded-full bg-gradient-to-br from-indigo-200/40 via-purple-100/30 to-transparent blur-3xl aurora-blob-1" />
+        <div className="absolute top-1/4 -right-32 w-[38rem] h-[38rem] rounded-full bg-gradient-to-bl from-sky-200/35 via-teal-100/25 to-transparent blur-3xl aurora-blob-2" />
+        <div className="absolute -bottom-32 left-1/4 w-[36rem] h-[36rem] rounded-full bg-gradient-to-tr from-rose-100/35 via-amber-100/25 to-transparent blur-3xl aurora-blob-3" />
+      </div>
+
+      {/* Floating Application Header */}
+      <div className="relative z-30 px-3 sm:px-6 pt-2 sm:pt-3">
+        <Header
+          currentLanguage={currentLanguage}
+          onLanguageChange={setCurrentLanguage}
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
+          autoSpeak={autoSpeak}
+          onToggleAutoSpeak={() => setAutoSpeak(prev => !prev)}
+          onOpenSettings={() => setIsSettingsOpen(true)}
+        />
+      </div>
 
       {/* Main View Area */}
-      <main className="flex-1 flex flex-col overflow-hidden relative">
+      <main className="flex-1 flex flex-col overflow-hidden relative z-10">
         {activeTab === 'chat' && (
           <ChatFeed
             messages={messages}
@@ -158,4 +168,5 @@ export const App: React.FC = () => {
   );
 };
 export default App;
+
 
