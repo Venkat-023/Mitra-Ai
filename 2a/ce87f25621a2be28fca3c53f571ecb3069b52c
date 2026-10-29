@@ -1,0 +1,18 @@
+backend/app/services/generation/answer_service.py
+  h_cd8a6bfed30f7c 142-148
+backend/app/services/generation/prompt_templates.py
+  h_cd8a6bfed30f7c 6
+frontend/src/components/ChatFeed.tsx
+  h_cd8a6bfed30f7c 84-94,123,128,354,381,393
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "2ace87f25621a2be28fca3c53f571ecb3069b52c",
+  "prompts": {},
+  "humans": {
+    "h_cd8a6bfed30f7c": {
+      "author": "sw <sw@sws-MacBook-Pro.local>"
+    }
+  }
+}
