@@ -1,0 +1,28 @@
+backend/app/main.py
+  h_cd8a6bfed30f7c 49-54
+backend/app/services/nlp/intent_extractor.py
+  h_cd8a6bfed30f7c 64-78
+backend/app/services/nlp/query_normalizer.py
+  h_cd8a6bfed30f7c 16-19,22,24-26,29,32-33,35-118,129-144,147,150-162,169-177,180-209,219-220,223-226,229-239,242,245-248
+backend/app/services/retrieval/hybrid_retriever.py
+  h_cd8a6bfed30f7c 134
+backend/app/services/retrieval/reranker.py
+  h_cd8a6bfed30f7c 11,15-21
+data/documents/rvitm_campus_infrastructure_and_facilities.md
+  h_cd8a6bfed30f7c 1-36
+data/documents/rvitm_institutional_overview_and_governance.md
+  h_cd8a6bfed30f7c 1-41
+data/documents/rvitm_student_life_clubs_and_committees.md
+  h_cd8a6bfed30f7c 1-37
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f41c16ce24be64260f9763732b322e52402aba7c",
+  "prompts": {},
+  "humans": {
+    "h_cd8a6bfed30f7c": {
+      "author": "sw <sw@sws-MacBook-Pro.local>"
+    }
+  }
+}
