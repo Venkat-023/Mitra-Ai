@@ -131,7 +131,7 @@ class HybridRetriever:
             candidates.append(c)
 
         # 5. Rerank top candidates
-        top_chunks = self.reranker.rerank(query, candidates, top_n=fused_top_k)
+        top_chunks = self.reranker.rerank(query, candidates, top_n=fused_top_k, search_keywords=keywords)
         max_score = top_chunks[0].final_score if top_chunks else 0.0
         # Calibrated grounding threshold
         is_grounded = bool(

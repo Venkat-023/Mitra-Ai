@@ -8,11 +8,17 @@ class MultilingualReranker:
     and section heading relevance.
     """
 
-    def rerank(self, query: str, candidates: List[RetrievedChunk], top_n: int = 6) -> List[RetrievedChunk]:
+    def rerank(self, query: str, candidates: List[RetrievedChunk], top_n: int = 6, search_keywords: list[str] = None) -> List[RetrievedChunk]:
         if not candidates:
             return []
 
-        query_terms = set(re.findall(r'[\w\-]+|[\u0900-\u097F]+|[\u0C80-\u0CFF]+', query.lower()))
+        raw_query_terms = [t.strip() for t in re.split(r'[\s\?\.\,\!\:\;\(\)\"\'\/।]+', query.lower()) if t.strip()]
+        query_terms = set(raw_query_terms)
+        if search_keywords:
+            for kw in search_keywords:
+                for sub_t in re.split(r'[\s\?\.\,\!\:\;\(\)\"\'\/।]+', kw.lower()):
+                    if sub_t.strip():
+                        query_terms.add(sub_t.strip())
         
         for chunk in candidates:
             # Composite score combining dense semantic, sparse lexical, and RRF rank signals

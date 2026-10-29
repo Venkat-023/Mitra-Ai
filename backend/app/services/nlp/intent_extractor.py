@@ -61,6 +61,21 @@ class IntentExtractor:
             r'cutoff', r'cut off', r'kcet', r'comedk', r'admission', r'rank', r'ranks',
             r'seat intake', r'seats', r'eligibility', r'quota', r'management quota',
             r'ಕಟ್ ಆಫ್', r'ಕಟ್‌ಆಫ್', r'ಪ್ರವೇಶ', r'कट ऑफ', r'कटऑफ़', r'दाखिला'
+        ],
+        "CAMPUS_FACILITIES": [
+            r'hostel', r'mess', r'bus', r'transport', r'cafeteria', r'canteen', r'gym', r'sports',
+            r'rfid', r'turnitin', r'drillbit', r'wifi', r'labs', r'classroom',
+            r'ವಸತಿ ನಿಲಯ', r'ಹಾಸ್ಟೆಲ್', r'ಬಸ್', r'ಸಾರಿಗೆ', r'हॉस्टल', r'मेस', r'बस'
+        ],
+        "STUDENT_CLUBS_ACTIVITIES": [
+            r'club', r'clubs', r'robotics', r'phoenix', r'ecx', r'coding club', r'e-cell',
+            r'rudra', r'kannada sangha', r'aegis', r'hackathon', r'magazine', r'fest',
+            r'ಕ್ಲಬ್', r'ರೋಬೋಟಿಕ್ಸ್', r'ಕನ್ನಡ ಸಂಘ', r'क्लब'
+        ],
+        "INSTITUTIONAL_HERITAGE": [
+            r'vision', r'mission', r'history', r'founder', r'rsst', r'sivananda sarma',
+            r'established', r'affiliation', r'vtu', r'aicte', r'trustee', r'trustees',
+            r'ದೃಷ್ಟಿ', r'ಧ್ಯೇಯ', r'ಸ್ಥಾಪನೆ', r'ವಿಷನ್', r'मिशन'
         ]
     }
 
