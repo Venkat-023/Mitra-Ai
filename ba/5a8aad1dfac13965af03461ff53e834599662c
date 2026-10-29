@@ -1,0 +1,16 @@
+backend/app/services/generation/answer_service.py
+  h_cd8a6bfed30f7c 117,120-126
+backend/app/services/generation/mock_provider.py
+  h_cd8a6bfed30f7c 3,8-11,15,17-26,28,31,35-39,43,45,49,51,55,57,60-190,192-199,201-208,210-220,222-230,232-240,242-252,254-267,269-270,272-273,275-276
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "ba5a8aad1dfac13965af03461ff53e834599662c",
+  "prompts": {},
+  "humans": {
+    "h_cd8a6bfed30f7c": {
+      "author": "sw <sw@sws-MacBook-Pro.local>"
+    }
+  }
+}
