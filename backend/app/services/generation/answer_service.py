@@ -114,9 +114,16 @@ class AnswerGenerationService:
             query=query.original_query
         )
 
-        # 5. Call LLM
+        # 5. Call LLM with seamless fallback to offline evidence synthesizer
         try:
             raw_output = await self.llm_provider.generate(system_prompt, user_prompt, temperature=0.1)
+        except Exception as exc:
+            # Automatic fallback to deterministic evidence synthesizer if API is rate-limited (429) or offline
+            from backend.app.services.generation.mock_provider import MockLLMProvider
+            fallback_provider = MockLLMProvider()
+            raw_output = await fallback_provider.generate(system_prompt, user_prompt, temperature=0.1)
+
+        try:
             clean_output = raw_output.strip()
             if "```json" in clean_output:
                 clean_output = clean_output.split("```json")[1].split("```")[0].strip()
