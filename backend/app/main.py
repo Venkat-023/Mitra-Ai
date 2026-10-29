@@ -52,6 +52,10 @@ async def lifespan(app: FastAPI):
                 category = "general"
             elif "clubs" in filename or "student_life" in filename:
                 category = "student_welfare"
+            elif "research" in filename or "innovation" in filename or "ipr" in filename:
+                category = "academic"
+            elif "leadership" in filename:
+                category = "administration"
 
             try:
                 await pipeline.ingest_document(
