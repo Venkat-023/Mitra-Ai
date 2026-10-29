@@ -1,0 +1,24 @@
+backend/Dockerfile
+  h_cd8a6bfed30f7c 1-29
+docker-compose.yml
+  h_cd8a6bfed30f7c 1-58
+docs/deployment/DATABASE_BACKUP_AND_RECOVERY.md
+  h_cd8a6bfed30f7c 1-45
+docs/deployment/PRODUCTION_DEPLOYMENT_GUIDE.md
+  h_cd8a6bfed30f7c 1-63
+frontend/Dockerfile
+  h_cd8a6bfed30f7c 1-19
+frontend/nginx.conf
+  h_cd8a6bfed30f7c 1-32
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "893801958daf5666c285e726a95e7a08a43c5e3c",
+  "prompts": {},
+  "humans": {
+    "h_cd8a6bfed30f7c": {
+      "author": "sw <sw@sws-MacBook-Pro.local>"
+    }
+  }
+}
