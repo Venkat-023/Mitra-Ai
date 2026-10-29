@@ -1,0 +1,32 @@
+backend/app/api/dependencies.py
+  h_cd8a6bfed30f7c 1-25
+backend/app/api/middleware.py
+  h_cd8a6bfed30f7c 1-65
+backend/app/api/v1/admin.py
+  h_cd8a6bfed30f7c 1-299
+backend/app/api/v1/chat.py
+  h_cd8a6bfed30f7c 1-126
+backend/app/api/v1/feedback.py
+  h_cd8a6bfed30f7c 1-34
+backend/app/api/v1/health.py
+  h_cd8a6bfed30f7c 1-26
+backend/app/api/v1/router.py
+  h_cd8a6bfed30f7c 1-9
+backend/app/api/v1/sources.py
+  h_cd8a6bfed30f7c 1-61
+backend/app/main.py
+  h_cd8a6bfed30f7c 1-87
+backend/tests/test_api.py
+  h_cd8a6bfed30f7c 1-143
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "e3c4443ce26ee2601a16aef02485e2ee4befaa0c",
+  "prompts": {},
+  "humans": {
+    "h_cd8a6bfed30f7c": {
+      "author": "sw <sw@sws-MacBook-Pro.local>"
+    }
+  }
+}
