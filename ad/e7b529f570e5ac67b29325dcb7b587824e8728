@@ -1,0 +1,14 @@
+backend/tests/test_security.py
+  h_cd8a6bfed30f7c 1-107
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "ade7b529f570e5ac67b29325dcb7b587824e8728",
+  "prompts": {},
+  "humans": {
+    "h_cd8a6bfed30f7c": {
+      "author": "sw <sw@sws-MacBook-Pro.local>"
+    }
+  }
+}
