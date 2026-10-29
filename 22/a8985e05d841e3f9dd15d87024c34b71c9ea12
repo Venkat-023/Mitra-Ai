@@ -1,0 +1,22 @@
+backend/app/services/retrieval/base.py
+  h_cd8a6bfed30f7c 1-26
+backend/app/services/retrieval/hybrid_retriever.py
+  h_cd8a6bfed30f7c 1-145
+backend/app/services/retrieval/metrics.py
+  h_cd8a6bfed30f7c 1-39
+backend/app/services/retrieval/reranker.py
+  h_cd8a6bfed30f7c 1-46
+backend/tests/test_retrieval.py
+  h_cd8a6bfed30f7c 1-129
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "22a8985e05d841e3f9dd15d87024c34b71c9ea12",
+  "prompts": {},
+  "humans": {
+    "h_cd8a6bfed30f7c": {
+      "author": "sw <sw@sws-MacBook-Pro.local>"
+    }
+  }
+}
