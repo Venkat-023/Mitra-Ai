@@ -1,0 +1,38 @@
+backend/app/services/embedding/base.py
+  h_cd8a6bfed30f7c 1-19
+backend/app/services/embedding/factory.py
+  h_cd8a6bfed30f7c 1-29
+backend/app/services/embedding/mock_provider.py
+  h_cd8a6bfed30f7c 1-49
+backend/app/services/embedding/providers.py
+  h_cd8a6bfed30f7c 1-56
+backend/app/services/ingestion/chunker.py
+  h_cd8a6bfed30f7c 1-111
+backend/app/services/ingestion/parser.py
+  h_cd8a6bfed30f7c 1-201
+backend/app/services/ingestion/pipeline.py
+  h_cd8a6bfed30f7c 1-165
+backend/tests/test_ingestion.py
+  h_cd8a6bfed30f7c 1-127
+data/documents/rvitm_academic_calendar_and_vtu_regulations.md
+  h_cd8a6bfed30f7c 1-32
+data/documents/rvitm_anti_ragging_and_conduct.md
+  h_cd8a6bfed30f7c 1-22
+data/documents/rvitm_bonafide_certificate_procedure.md
+  h_cd8a6bfed30f7c 1-31
+data/documents/rvitm_department_directory.md
+  h_cd8a6bfed30f7c 1-54
+data/documents/rvitm_scholarships_circular.md
+  h_cd8a6bfed30f7c 1-22
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "5a9508b62c7bd1db8ddb5193571a74117ad06f5b",
+  "prompts": {},
+  "humans": {
+    "h_cd8a6bfed30f7c": {
+      "author": "sw <sw@sws-MacBook-Pro.local>"
+    }
+  }
+}
