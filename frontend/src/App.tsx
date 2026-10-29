@@ -5,6 +5,7 @@ import { ChatFeed } from './components/ChatFeed';
 import { WorkflowsView } from './components/WorkflowsView';
 import { AdminPortal } from './components/AdminPortal';
 import { SourceDrawer } from './components/SourceDrawer';
+import { SettingsModal } from './components/SettingsModal';
 import { sendChatMessage, getSourceDocument } from './services/api';
 
 export const App: React.FC = () => {
@@ -22,6 +23,10 @@ export const App: React.FC = () => {
     return newId;
   });
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  // Voice Agent and Settings state
+  const [autoSpeak, setAutoSpeak] = useState<boolean>(true);
+  const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
 
   // Citation Drawer state
   const [selectedCitation, setSelectedCitation] = useState<CitationItem | null>(null);
@@ -98,13 +103,16 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-950 text-slate-100 font-sans selection:bg-blue-600 selection:text-white">
+    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-800 font-sans selection:bg-blue-600 selection:text-white">
       {/* Top Application Header */}
       <Header
         currentLanguage={currentLanguage}
         onLanguageChange={setCurrentLanguage}
         activeTab={activeTab}
         onTabChange={setActiveTab}
+        autoSpeak={autoSpeak}
+        onToggleAutoSpeak={() => setAutoSpeak(prev => !prev)}
+        onOpenSettings={() => setIsSettingsOpen(true)}
       />
 
       {/* Main View Area */}
@@ -116,6 +124,8 @@ export const App: React.FC = () => {
             onSendMessage={handleSendMessage}
             onSelectCitation={handleSelectCitation}
             conversationId={conversationId}
+            autoSpeak={autoSpeak}
+            currentLanguage={currentLanguage}
           />
         )}
 
@@ -138,7 +148,14 @@ export const App: React.FC = () => {
         documentDetails={documentDetails}
         loading={drawerLoading}
       />
+
+      {/* LLM & AI Engine Settings Modal */}
+      <SettingsModal
+        isOpen={isSettingsOpen}
+        onClose={() => setIsSettingsOpen(false)}
+      />
     </div>
   );
 };
 export default App;
+
